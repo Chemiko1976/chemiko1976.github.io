@@ -17,7 +17,7 @@
 <link rel="apple-touch-icon" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&family=Work+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&family=Work+Sans:wght@400;500;600;700&family=Nanum+Brush+Script&display=swap">
 <style>
   :root{
     --navy:#1F4E78;
@@ -289,62 +289,21 @@
   .ceo{padding-block:34px 84px;}
   .ceo .eyebrow2{margin:22px 0 14px;font-family:var(--label);font-weight:600;font-size:14px;letter-spacing:.08em;color:var(--muted);}
   .ceo h1{margin:0 0 34px;font-size:clamp(24px,3.6vw,36px);line-height:1.42;font-weight:500;letter-spacing:-.025em;color:var(--navy-deep);}
-  .ceoGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:44px;align-items:start;}
-  .ceoPhoto{background:var(--fill);border:1px dashed #C2CCD6;aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;padding:20px;text-align:center;}
-  .ceoPhoto p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.8;}
-  .ceoBody{max-width:66ch;}
+  .ceoCol{max-width:760px;margin:0 auto;}
+  .ceoBody{max-width:none;}
   .ceoBody p{margin:0 0 18px;font-size:16.5px;color:var(--body);line-height:1.85;}
   .ceoBody p.greet{font-size:18px;color:var(--ink);font-weight:500;margin-bottom:24px;}
   .ceoBody p.closing{margin-top:26px;}
   .sign{margin-top:34px;padding-top:24px;border-top:1px solid var(--rule);}
   .sign .co{margin:0;font-size:15px;color:var(--body);}
   .sign .who{margin:7px 0 0;font-size:19px;font-weight:700;color:var(--ink);letter-spacing:-.01em;}
-  @media (min-width:860px){ .ceoGrid{grid-template-columns:minmax(0,1.75fr) minmax(300px,1fr);} .ceoGrid .globeFig{order:2;} }
+  .sign .auto{
+    display:inline-block;margin:10px 0 0;
+    font-family:'Nanum Brush Script','Nanum Pen Script',cursive;
+    font-size:clamp(38px,5vw,48px);line-height:1.05;color:#1A1A1A;
+    letter-spacing:.03em;transform:rotate(-2.5deg);transform-origin:left center;
+  }
 
-  /* 글로벌 파트너십 — 지구본 */
-  .globeFig{margin:0;}
-  .globeStage{
-    position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;
-    background:radial-gradient(circle at 50% 47%,#1C3C5A 0%,#102A40 46%,#08121C 100%);
-    border:1px solid #0B2133;container-type:size;
-  }
-  .globeStage .glow{
-    position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(circle at 50% 47%,rgba(70,142,201,.32),rgba(70,142,201,0) 55%);
-  }
-  .globeVid{
-    position:absolute;top:47%;left:50%;width:47cqmin;height:47cqmin;
-    transform:translate(-50%,-50%);object-fit:cover;display:block;
-    -webkit-mask-image:radial-gradient(circle closest-side,#000 0 83%,rgba(0,0,0,0) 100%);
-    mask-image:radial-gradient(circle closest-side,#000 0 83%,rgba(0,0,0,0) 100%);
-  }
-  .globeStage .halo{
-    position:absolute;top:47%;left:50%;width:62cqmin;height:62cqmin;
-    transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;
-    background:radial-gradient(circle closest-side,rgba(96,170,225,0) 58%,rgba(96,170,225,.26) 72%,rgba(96,170,225,0) 100%);
-  }
-  .ring{position:absolute;top:47%;left:50%;width:0;height:0;--r:34cqmin;animation:orbF 64s linear infinite;}
-  .ring .chipIn{animation:orbR 64s linear infinite;}
-  .chip{
-    position:absolute;top:0;left:0;display:block;
-    transform:translate(-50%,-50%) rotate(var(--a)) translateX(var(--r)) rotate(calc(-1 * var(--a)));
-  }
-  .chipIn{
-    display:grid;width:26cqmin;height:10cqmin;
-    background:#fff;border-radius:2px;box-shadow:0 4px 14px rgba(0,0,0,.42);
-  }
-  .chipIn .f{
-    grid-area:1/1;display:grid;place-items:center;padding:1.7cqmin 2.1cqmin;
-    opacity:0;animation:swap 16s linear infinite;animation-delay:var(--d,0s);
-  }
-  .chipIn .f + .f{animation-delay:calc(var(--d,0s) - 8s);}
-  .chipIn img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
-  .chipIn .tx{font-size:4cqmin;font-weight:700;letter-spacing:-.01em;color:#1B2B3A;white-space:nowrap;}
-  @keyframes orbF{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
-  @keyframes orbR{from{transform:rotate(0deg);}to{transform:rotate(-360deg);}}
-  @keyframes swap{0%{opacity:0}3%{opacity:1}47%{opacity:1}50%{opacity:0}100%{opacity:0}}
-  .globeFig figcaption{margin:14px 0 0;font-size:13.5px;color:var(--muted);line-height:1.7;}
-  @media (prefers-reduced-motion:reduce){ .ring,.ring .chipIn,.chipIn .f{animation:none;} .chipIn .f{opacity:1;} .chipIn .f + .f{display:none;} }
 
 
   /* 파트너사 분류 페이지 */
@@ -389,7 +348,10 @@
   .col3 p{margin:0;font-size:15px;color:var(--body);}
   .gal2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:16px;}
   .gal2 img,.wideImg{width:100%;height:auto;display:block;}
-  .wideImg{margin-top:24px;}
+  .gal2 figure,.wideFig{margin:0;}
+  .gal2 img{aspect-ratio:16/10;object-fit:cover;}
+  .gal2 figcaption,.wideFig figcaption{margin:9px 0 0;font-size:13px;color:var(--muted);}
+  .wideFig{margin-top:24px;}
   .values{background:var(--blue);padding:40px 36px;margin-top:56px;}
   .values .eb{margin:0 0 11px;font-family:var(--label);font-weight:600;font-size:13px;letter-spacing:.09em;color:var(--red);}
   .values h2{color:var(--navy-deep);margin:0 0 12px;font-size:clamp(21px,3vw,29px);font-weight:500;letter-spacing:-.02em;}
@@ -518,11 +480,14 @@
       <p class="eb">PYEONGTAEK R&amp;D CENTER</p>
       <h2>기술을 직접 보고, 경험하는 공간</h2>
       <p>평택지사는 장비 시연과 교육, 유지보수 및 수리를 위한 기술 지원 거점입니다. 다양한 장비를 직접 확인하고 활용 방법을 살펴볼 수 있는 공간을 갖추고 있습니다.</p>
-      <img class="wideImg" src="assets/about/pt-hall.jpg" alt="케미코 평택지사 장비 전시장">
       <div class="gal2">
-        <img src="assets/about/pt-cut.jpg" alt="평택지사 절단 및 가공 장비 전시 공간">
-        <img src="assets/about/pt-weld.jpg" alt="평택지사 용접 장비 전시 공간">
+        <figure><img src="assets/about/pt-office.jpg" alt="케미코 평택지사 사옥 외관"><figcaption>평택지사 사옥</figcaption></figure>
+        <figure><img src="assets/about/pt-cut.jpg" alt="평택지사 절단 및 오비탈 용접 장비 전시 공간"><figcaption>절단 · 오비탈 용접 장비</figcaption></figure>
       </div>
+      <figure class="wideFig">
+        <img class="wideImg" src="assets/about/pt-hall.jpg" alt="케미코 평택지사 장비 전시장 전경">
+        <figcaption>평택지사 전시장 전경</figcaption>
+      </figure>
     </section>
 
     <section class="values">
@@ -597,9 +562,9 @@
   <section class="ceo">
     <div class="wrap">
       <a class="backLink" href="#top">&larr; 홈</a>
+      <div class="ceoCol">
       <p class="eyebrow2">대표인사말</p>
       <h1>앞선 기술과 오랜 신뢰로<br>우리 산업의 내일을 함께 만들어갑니다.</h1>
-      <div class="ceoGrid">
         <div class="ceoBody">
           <p class="greet">안녕하십니까.<br>주식회사 케미코 대표이사 하수진입니다.</p>
           <p>케미코를 찾아주신 여러분께 감사드립니다.</p>
@@ -612,24 +577,9 @@
           <div class="sign">
             <p class="co">주식회사 케미코</p>
             <p class="who">대표이사 하수진</p>
+            <p class="auto" aria-hidden="true">하수진</p>
           </div>
         </div>
-        <figure class="globeFig">
-          <div class="globeStage" aria-hidden="true">
-            <span class="glow"></span>
-            <span class="halo"></span>
-            <video id="globeVid" class="globeVid" muted loop playsinline preload="none" poster="assets/video/globe.jpg"><source src="assets/video/globe.mp4" type="video/mp4"></video>
-            <div class="ring">
-              <span class="chip" style="--a:0deg"><span class="chipIn" style="--d:0s"><span class="f"><img src="assets/logo-polysoude.png" alt=""></span><span class="f"><img src="assets/logo-utp.png" alt=""></span></span></span>
-              <span class="chip" style="--a:60deg"><span class="chipIn" style="--d:-2.6s"><span class="f"><img src="assets/logo-orbitalum.png" alt=""></span><span class="f"><img src="assets/logo-vac.png" alt=""></span></span></span>
-              <span class="chip" style="--a:120deg"><span class="chipIn" style="--d:-5.2s"><span class="f"><img src="assets/logo-gbc.png" alt=""></span><span class="f"><img src="assets/logo-bedra.png" alt=""></span></span></span>
-              <span class="chip" style="--a:180deg"><span class="chipIn" style="--d:-1.3s"><span class="f"><img src="assets/logo-transfluid.png" alt=""></span><span class="f"><img src="assets/logo-safra.png" alt=""></span></span></span>
-              <span class="chip" style="--a:240deg"><span class="chipIn" style="--d:-3.9s"><span class="f"><img src="assets/logo-bauer.png" alt=""></span><span class="f"><img src="assets/logo-lsn.png" alt=""></span></span></span>
-              <span class="chip" style="--a:300deg"><span class="chipIn" style="--d:-6.5s"><span class="f"><img src="assets/logo-efco.png" alt=""></span><span class="f"><span class="tx">T-DRILL</span></span></span></span>
-            </div>
-          </div>
-          <figcaption>세계 유수의 제조사와 함께 한국 산업 현장을 연결합니다.</figcaption>
-        </figure>
       </div>
     </div>
   </section>
@@ -935,15 +885,6 @@
       if(hash.length > 1){
         var t = document.getElementById(hash.slice(1));
         if(t){ setTimeout(function(){ t.scrollIntoView({block:'start'}); }, 0); }
-      }
-    }
-    var gv = document.getElementById('globeVid');
-    if(gv){
-      if(mp && mp[1].toLowerCase() === 'ceo'){
-        var pr; try{ pr = gv.play(); }catch(e){}
-        if(pr && pr.catch) pr.catch(function(){});
-      } else {
-        try{ gv.pause(); }catch(e){}
       }
     }
   }
