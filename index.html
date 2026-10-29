@@ -17,7 +17,7 @@
 <link rel="apple-touch-icon" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&family=Work+Sans:wght@400;500;600;700&family=Nanum+Brush+Script&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&family=Work+Sans:wght@400;500;600;700&display=swap">
 <style>
   :root{
     --navy:#1F4E78;
@@ -297,11 +297,9 @@
   .sign{margin-top:34px;padding-top:24px;border-top:1px solid var(--rule);}
   .sign .co{margin:0;font-size:15px;color:var(--body);}
   .sign .who{margin:7px 0 0;font-size:19px;font-weight:700;color:var(--ink);letter-spacing:-.01em;}
-  .sign .auto{
-    display:inline-block;margin:10px 0 0;
-    font-family:'Nanum Brush Script','Nanum Pen Script',cursive;
-    font-size:clamp(38px,5vw,48px);line-height:1.05;color:#1A1A1A;
-    letter-spacing:.03em;transform:rotate(-2.5deg);transform-origin:left center;
+  .sign .autograph{
+    display:block;margin:14px 0 0;
+    width:min(252px,72%);height:auto;
   }
 
 
@@ -577,7 +575,7 @@
           <div class="sign">
             <p class="co">주식회사 케미코</p>
             <p class="who">대표이사 하수진</p>
-            <p class="auto" aria-hidden="true">하수진</p>
+            <img class="autograph" src="assets/signature.png" alt="대표이사 하수진 서명">
           </div>
         </div>
       </div>
@@ -715,11 +713,11 @@
   <div class="wrap inner">
     <img src="assets/logo.png" alt="케미코">
     <div class="finfo">
-      <p>주식회사 케미코 · 대표 [대표자명]</p>
+      <p>주식회사 케미코 · 대표 하수진</p>
       <p>서울특별시 강남구 테헤란로38길 43, 청록빌딩</p>
       <p>Tel 02-562-7864</p>
       <p>chemiko@chemiko.net</p>
-      <p>사업자등록번호 [번호]</p>
+      <p>사업자등록번호 220-81-16217</p>
     </div>
     <p class="copy">© 2026 CHEMIKO CO., LTD.</p>
   </div>
