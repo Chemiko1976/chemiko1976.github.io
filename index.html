@@ -1,4 +1,22 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
 <title>케미코 테스트 사이트</title>
+<meta name="description" content="케미코는 1976년 설립된 산업용 소재·용접재료 및 용접장비 전문기업입니다. 유럽 제조사의 한국 공식 대리점으로 반도체, 조선, 자동차, 발전·원자력 현장에 기술을 공급합니다.">
+<meta name="theme-color" content="#1F4E78">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="케미코 CHEMIKO">
+<meta property="og:title" content="케미코 | 산업용 소재·용접장비">
+<meta property="og:description" content="케미코는 1976년 설립된 산업용 소재·용접재료 및 용접장비 전문기업입니다. 유럽 제조사의 한국 공식 대리점으로 반도체, 조선, 자동차, 발전·원자력 현장에 기술을 공급합니다.">
+<meta property="og:image" content="assets/video/auto.jpg">
+<meta property="og:locale" content="ko_KR">
+<link rel="icon" href="assets/logo.png">
+<link rel="apple-touch-icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&family=Work+Sans:wght@400;500;600;700&display=swap">
 <style>
   :root{
@@ -47,8 +65,9 @@
     border-bottom:1px solid var(--rule);
   }
   .bar{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;min-height:72px;}
-  .bar .logo{display:flex;align-items:center;flex:0 0 auto;}
-  .bar .logo img{height:28px;width:auto;display:block;}
+  .bar .logo{display:flex;align-items:center;gap:11px;flex:0 0 auto;text-decoration:none;}
+  .bar .logo img{height:30px;width:auto;display:block;}
+  .bar .logo .wordmark{font-size:23px;font-weight:700;letter-spacing:-.035em;color:var(--ink);line-height:1.1;white-space:nowrap;}
   .bar nav{display:flex;flex-wrap:wrap;align-items:center;gap:22px;flex:1 1 260px;}
   .bar nav a{text-decoration:none;color:var(--ink);font-size:15px;font-weight:500;}
   .bar nav a:hover{color:var(--navy);}
@@ -82,6 +101,52 @@
   .btn.ghost{background:transparent;color:var(--ink);border-color:#C6CFD7;}
   .btn.ghost:hover{background:var(--fill);color:var(--ink);}
   .btn.lg{padding:15px 32px;font-size:15.5px;}
+
+  /* 모바일 메뉴 */
+  .burger{display:none;}
+  @media (max-width:860px){
+    .bar{flex-wrap:wrap;gap:0;min-height:60px;}
+    .bar .logo{flex:1 1 auto;padding-block:11px;gap:9px;}
+    .bar .logo img{height:26px;}
+    .bar .logo .wordmark{font-size:19.5px;}
+    .burger{
+      display:flex;flex-direction:column;justify-content:center;gap:5px;
+      flex:0 0 auto;width:44px;height:44px;padding:0 9px;margin-right:-9px;
+      background:none;border:0;cursor:pointer;
+    }
+    .burger span{display:block;height:2px;background:var(--ink);transition:transform .22s ease,opacity .16s ease;}
+    .bar.navopen .burger span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .bar.navopen .burger span:nth-child(2){opacity:0;}
+    .bar.navopen .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+    .bar nav{
+      display:none;order:3;flex:1 1 100%;flex-direction:column;
+      align-items:stretch;gap:0;padding:0 0 4px;
+    }
+    .bar.navopen nav{display:flex;}
+    .navItem{border-top:1px solid var(--rule);}
+    .bar nav > a{border-top:1px solid var(--rule);display:flex;align-items:center;min-height:52px;font-size:16px;}
+    .navBtn{
+      display:flex;align-items:center;justify-content:space-between;
+      width:100%;min-height:52px;font-size:16px;text-align:left;
+    }
+    .navBtn::after{transform:rotate(45deg) translateY(-2px);transition:transform .2s ease;}
+    .navItem.open .navBtn::after{transform:rotate(225deg) translateY(2px);}
+    .navItem:hover .dropdown{display:none;}
+    .navItem.open .dropdown{display:block;}
+    .dropdown{
+      position:static;min-width:0;margin:0 0 10px;padding:0 0 0 13px;
+      border:0;box-shadow:none;background:transparent;
+    }
+    .dropdown a{padding:11px 0;font-size:15px;color:var(--body);}
+    .dropdown a:hover{background:transparent;}
+    .bar .util{
+      display:none;order:4;flex:1 1 100%;gap:14px;
+      padding:14px 0 16px;border-top:1px solid var(--rule);
+    }
+    .bar.navopen .util{display:flex;}
+    .bar .util .btn{flex:1 1 auto;}
+  }
 
   /* hero */
   .hero{position:relative;background:#0D1E2D;}
@@ -234,7 +299,52 @@
   .sign{margin-top:34px;padding-top:24px;border-top:1px solid var(--rule);}
   .sign .co{margin:0;font-size:15px;color:var(--body);}
   .sign .who{margin:7px 0 0;font-size:19px;font-weight:700;color:var(--ink);letter-spacing:-.01em;}
-  @media (min-width:860px){ .ceoGrid{grid-template-columns:minmax(0,1.9fr) minmax(240px,.85fr);} .ceoGrid .ceoPhoto{order:2;} }
+  @media (min-width:860px){ .ceoGrid{grid-template-columns:minmax(0,1.75fr) minmax(300px,1fr);} .ceoGrid .globeFig{order:2;} }
+
+  /* 글로벌 파트너십 — 지구본 */
+  .globeFig{margin:0;}
+  .globeStage{
+    position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;
+    background:radial-gradient(circle at 50% 47%,#1C3C5A 0%,#102A40 46%,#08121C 100%);
+    border:1px solid #0B2133;container-type:size;
+  }
+  .globeStage .glow{
+    position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(circle at 50% 47%,rgba(70,142,201,.32),rgba(70,142,201,0) 55%);
+  }
+  .globeVid{
+    position:absolute;top:47%;left:50%;width:47cqmin;height:47cqmin;
+    transform:translate(-50%,-50%);object-fit:cover;display:block;
+    -webkit-mask-image:radial-gradient(circle closest-side,#000 0 83%,rgba(0,0,0,0) 100%);
+    mask-image:radial-gradient(circle closest-side,#000 0 83%,rgba(0,0,0,0) 100%);
+  }
+  .globeStage .halo{
+    position:absolute;top:47%;left:50%;width:62cqmin;height:62cqmin;
+    transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;
+    background:radial-gradient(circle closest-side,rgba(96,170,225,0) 58%,rgba(96,170,225,.26) 72%,rgba(96,170,225,0) 100%);
+  }
+  .ring{position:absolute;top:47%;left:50%;width:0;height:0;--r:34cqmin;animation:orbF 64s linear infinite;}
+  .ring .chipIn{animation:orbR 64s linear infinite;}
+  .chip{
+    position:absolute;top:0;left:0;display:block;
+    transform:translate(-50%,-50%) rotate(var(--a)) translateX(var(--r)) rotate(calc(-1 * var(--a)));
+  }
+  .chipIn{
+    display:grid;width:26cqmin;height:10cqmin;
+    background:#fff;border-radius:2px;box-shadow:0 4px 14px rgba(0,0,0,.42);
+  }
+  .chipIn .f{
+    grid-area:1/1;display:grid;place-items:center;padding:1.7cqmin 2.1cqmin;
+    opacity:0;animation:swap 16s linear infinite;animation-delay:var(--d,0s);
+  }
+  .chipIn .f + .f{animation-delay:calc(var(--d,0s) - 8s);}
+  .chipIn img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
+  .chipIn .tx{font-size:4cqmin;font-weight:700;letter-spacing:-.01em;color:#1B2B3A;white-space:nowrap;}
+  @keyframes orbF{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+  @keyframes orbR{from{transform:rotate(0deg);}to{transform:rotate(-360deg);}}
+  @keyframes swap{0%{opacity:0}3%{opacity:1}47%{opacity:1}50%{opacity:0}100%{opacity:0}}
+  .globeFig figcaption{margin:14px 0 0;font-size:13.5px;color:var(--muted);line-height:1.7;}
+  @media (prefers-reduced-motion:reduce){ .ring,.ring .chipIn,.chipIn .f{animation:none;} .chipIn .f{opacity:1;} .chipIn .f + .f{display:none;} }
 
 
   /* 파트너사 분류 페이지 */
@@ -305,14 +415,41 @@
   @media (prefers-reduced-motion:reduce){
     .stage video,.stage img{transition:none;}
   }
-</style>
 
+  /* 좁은 화면 마무리 — 반드시 스타일시트 끝에 둘 것 */
+  @media (max-width:560px){
+    body{font-size:15.5px;}
+    .testbar{font-size:12px;padding:8px 16px;text-align:left;}
+    .sectorbar .in{gap:6px 18px;padding-block:12px;}
+    .tab{padding:9px 13px;}
+    .tab .l{font-size:14px;}
+    .values{padding:30px 20px;}
+    .callout{padding:24px 20px;}
+    .statRow div{padding:20px 18px;}
+    .pgHead{padding-block:34px 30px;}
+    .blk{padding-block:40px 0;}
+    .branch{padding-block:38px 0;}
+    .branch + .branch{margin-top:38px;}
+    .pgBody{padding-block:0 60px;}
+    .values{margin-top:40px;}
+    .callout{margin-top:40px;}
+    .statRow{margin-top:32px;}
+    ul.sup{padding:12px;gap:6px;grid-template-columns:repeat(auto-fit,minmax(142px,1fr));}
+    ul.sup a{padding:18px 8px;gap:10px;min-height:120px;grid-template-rows:46px auto;}
+    ul.sup img{max-width:132px;}
+    ul.sup .nm{font-size:18px;}
+    ul.sup .mt{font-size:14.5px;}
+  }
+</style>
+</head>
+<body>
 <p class="testbar"><b>시험용 페이지입니다.</b> 디자인 확인을 위한 것으로 실제 케미코 홈페이지가 아닙니다. 사진과 일부 문구는 확정 전입니다.</p>
 
 <header class="site">
   <div class="wrap bar">
-    <a class="logo" href="#top" aria-label="케미코 홈"><img src="assets/logo.png" alt="케미코"></a>
-    <nav aria-label="주 메뉴">
+    <a class="logo" href="#top" aria-label="주식회사 케미코 홈"><img src="assets/mark.png" alt=""><span class="wordmark">주식회사 케미코</span></a>
+    <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="mainnav" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+    <nav id="mainnav" aria-label="주 메뉴">
       <div class="navItem">
         <button type="button" class="navBtn" aria-expanded="false" aria-controls="m-about">회사소개</button>
         <ul class="dropdown" id="m-about">
@@ -477,7 +614,22 @@
             <p class="who">대표이사 하수진</p>
           </div>
         </div>
-        <div class="ceoPhoto"><p>[대표이사 사진]<br>세로형 3:4<br>가로 1000px 이상</p></div>
+        <figure class="globeFig">
+          <div class="globeStage" aria-hidden="true">
+            <span class="glow"></span>
+            <span class="halo"></span>
+            <video id="globeVid" class="globeVid" muted loop playsinline preload="none" poster="assets/video/globe.jpg"><source src="assets/video/globe.mp4" type="video/mp4"></video>
+            <div class="ring">
+              <span class="chip" style="--a:0deg"><span class="chipIn" style="--d:0s"><span class="f"><img src="assets/logo-polysoude.png" alt=""></span><span class="f"><img src="assets/logo-utp.png" alt=""></span></span></span>
+              <span class="chip" style="--a:60deg"><span class="chipIn" style="--d:-2.6s"><span class="f"><img src="assets/logo-orbitalum.png" alt=""></span><span class="f"><img src="assets/logo-vac.png" alt=""></span></span></span>
+              <span class="chip" style="--a:120deg"><span class="chipIn" style="--d:-5.2s"><span class="f"><img src="assets/logo-gbc.png" alt=""></span><span class="f"><img src="assets/logo-bedra.png" alt=""></span></span></span>
+              <span class="chip" style="--a:180deg"><span class="chipIn" style="--d:-1.3s"><span class="f"><img src="assets/logo-transfluid.png" alt=""></span><span class="f"><img src="assets/logo-safra.png" alt=""></span></span></span>
+              <span class="chip" style="--a:240deg"><span class="chipIn" style="--d:-3.9s"><span class="f"><img src="assets/logo-bauer.png" alt=""></span><span class="f"><img src="assets/logo-lsn.png" alt=""></span></span></span>
+              <span class="chip" style="--a:300deg"><span class="chipIn" style="--d:-6.5s"><span class="f"><img src="assets/logo-efco.png" alt=""></span><span class="f"><span class="tx">T-DRILL</span></span></span></span>
+            </div>
+          </div>
+          <figcaption>세계 유수의 제조사와 함께 한국 산업 현장을 연결합니다.</figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -785,6 +937,15 @@
         if(t){ setTimeout(function(){ t.scrollIntoView({block:'start'}); }, 0); }
       }
     }
+    var gv = document.getElementById('globeVid');
+    if(gv){
+      if(mp && mp[1].toLowerCase() === 'ceo'){
+        var pr; try{ pr = gv.play(); }catch(e){}
+        if(pr && pr.catch) pr.catch(function(){});
+      } else {
+        try{ gv.pause(); }catch(e){}
+      }
+    }
   }
   // 회사소개 하위 메뉴
   var navItems = Array.prototype.slice.call(document.querySelectorAll('.navItem'));
@@ -810,11 +971,32 @@
       a.addEventListener('click', function(){ closeMenus(null); });
     });
   });
+  // 모바일 햄버거
+  var bar = document.querySelector('.bar');
+  var burger = document.getElementById('burger');
+  function setPanel(open){
+    if(!bar || !burger) return;
+    bar.classList.toggle('navopen', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+    if(!open) closeMenus(null);
+  }
+  if(burger && bar){
+    burger.addEventListener('click', function(e){
+      e.stopPropagation();
+      setPanel(!bar.classList.contains('navopen'));
+    });
+    bar.querySelectorAll('nav a, .util a').forEach(function(a){
+      a.addEventListener('click', function(){ setPanel(false); });
+    });
+  }
   document.addEventListener('click', function(e){
-    var inside = navItems.some(function(it){ return it.contains(e.target); });
-    if(!inside) closeMenus(null);
+    var hdr = document.querySelector('header.site');
+    if(hdr && hdr.contains(e.target)) return;
+    closeMenus(null);
+    setPanel(false);
   });
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMenus(null); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ closeMenus(null); setPanel(false); } });
 
   document.querySelectorAll('.copy').forEach(function(b){
     b.addEventListener('click', function(){
@@ -830,3 +1012,5 @@
   route();
 })();
 </script>
+</body>
+</html>
