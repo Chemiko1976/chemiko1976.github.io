@@ -11,8 +11,10 @@
 <meta property="og:site_name" content="케미코 CHEMIKO">
 <meta property="og:title" content="케미코 | 산업용 소재·용접장비">
 <meta property="og:description" content="케미코는 1976년 설립된 산업용 소재·용접재료 및 용접장비 전문기업입니다. 유럽 제조사의 한국 공식 대리점으로 반도체, 조선, 자동차, 발전·원자력 현장에 기술을 공급합니다.">
-<meta property="og:image" content="assets/video/auto.jpg">
+<meta property="og:image" content="assets/video/semi1.jpg">
 <meta property="og:locale" content="ko_KR">
+<link rel="alternate" hreflang="ko" href="./">
+<link rel="alternate" hreflang="en" href="en/">
 <link rel="icon" href="assets/logo.png">
 <link rel="apple-touch-icon" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,6 +45,8 @@
     font-size:16px;
     line-height:1.7;
     -webkit-font-smoothing:antialiased;
+    word-break:keep-all;          /* 낱말 중간에서 줄이 바뀌지 않도록 */
+    overflow-wrap:break-word;     /* 긴 주소 등 끊을 데 없는 글자만 예외 */
   }
   img{max-width:100%;}
   a{color:var(--navy);}
@@ -65,10 +69,11 @@
     border-bottom:1px solid var(--rule);
   }
   .bar{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;min-height:72px;}
-  .bar .logo{display:flex;align-items:center;gap:11px;flex:0 0 auto;text-decoration:none;}
+  .bar .logo{display:flex;align-items:center;gap:11px;flex:0 0 auto;text-decoration:none;margin-right:30px;}
   .bar .logo img{height:30px;width:auto;display:block;}
   .bar .logo .wordmark{font-size:23px;font-weight:700;letter-spacing:-.035em;color:var(--ink);line-height:1.1;white-space:nowrap;}
-  .bar nav{display:flex;flex-wrap:wrap;align-items:center;gap:22px;flex:1 1 260px;}
+  .bar .logo .wordmark em{font-size:.8em;font-style:normal;}
+  .bar nav{display:flex;flex-wrap:wrap;align-items:center;gap:34px;flex:1 1 300px;}
   .bar nav a{text-decoration:none;color:var(--ink);font-size:15px;font-weight:500;}
   .bar nav a:hover{color:var(--navy);}
   .navItem{position:relative;}
@@ -89,7 +94,11 @@
   .dropdown a{display:block;padding:12px 14px;text-decoration:none;color:var(--ink);font-size:14.5px;font-weight:500;}
   .dropdown a:hover{background:var(--fill);color:var(--navy);}
   .bar .util{display:flex;align-items:center;gap:14px;flex:0 0 auto;}
-  .lang{text-decoration:none;color:var(--muted);font-family:var(--label);font-weight:600;font-size:13px;letter-spacing:.04em;}
+  .lang{display:inline-flex;align-items:center;gap:5px;font-family:var(--label);font-weight:600;font-size:13px;letter-spacing:.04em;color:var(--muted);}
+  .lang a{color:var(--muted);text-decoration:none;}
+  .lang a:hover{color:var(--navy);}
+  .lang b{color:var(--navy-deep);}
+  .lang .sep{color:#C6CFD7;font-weight:400;}
   .btn{
     display:inline-flex;align-items:center;justify-content:center;
     min-height:44px;padding:11px 22px;
@@ -106,7 +115,7 @@
   .burger{display:none;}
   @media (max-width:860px){
     .bar{flex-wrap:wrap;gap:0;min-height:60px;}
-    .bar .logo{flex:1 1 auto;padding-block:11px;gap:9px;}
+    .bar .logo{flex:1 1 auto;padding-block:11px;gap:9px;margin-right:0;}
     .bar .logo img{height:26px;}
     .bar .logo .wordmark{font-size:19.5px;}
     .burger{
@@ -150,7 +159,8 @@
 
   /* hero */
   .hero{position:relative;background:#0D1E2D;}
-  .stage{position:relative;width:100%;aspect-ratio:2/1;max-height:660px;min-height:380px;overflow:hidden;}
+  /* 큰 화면(TV 등)에서는 화면 높이에 맞춰 더 키웁니다. 660px 아래로는 줄지 않습니다. */
+  .stage{position:relative;width:100%;aspect-ratio:2/1;max-height:clamp(660px,80vh,880px);min-height:380px;overflow:hidden;}
   .stage video,.stage img{
     position:absolute;inset:0;width:100%;height:100%;
     object-fit:cover;display:block;opacity:0;
@@ -216,21 +226,55 @@
   .supHead{margin:0 0 14px;font-family:var(--label);font-size:18px;font-weight:700;letter-spacing:.03em;color:var(--ink);}
   .supHead span{margin-left:11px;font-family:var(--label);font-size:14.5px;font-weight:500;color:var(--navy);letter-spacing:0;}
   ul.sup{
-    list-style:none;margin:0;padding:16px;display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(172px,1fr));gap:8px;
-    background:#F4F6F8;border:1px solid var(--rule);
+    list-style:none;margin:0;padding:0;display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(196px,1fr));gap:10px;
   }
   ul.sup li{display:flex;}
   ul.sup a{
-    flex:1 1 auto;display:grid;grid-template-rows:58px auto;align-content:center;justify-items:center;
-    gap:13px;padding:22px 12px;min-height:134px;
-    border:1px solid transparent;background:transparent;text-decoration:none;color:var(--ink);
-    transition:background .15s ease,border-color .15s ease;
+    flex:1 1 auto;display:grid;grid-template-rows:40px auto;align-content:center;justify-items:center;
+    gap:11px;padding:26px 12px 18px;
+    border:1px solid var(--rule);background:#fff;text-decoration:none;color:var(--ink);
+    transition:border-color .15s ease,box-shadow .15s ease;
   }
-  ul.sup a:hover{background:#fff;border-color:var(--rule);}
-  ul.sup img{width:100%;max-width:166px;height:auto;display:block;align-self:center;}
-  ul.sup .nm{font-size:21px;font-weight:700;letter-spacing:.02em;color:#2C3E50;align-self:center;}
-  ul.sup .mt{font-size:17px;color:var(--muted);text-align:center;line-height:1.45;align-self:start;}
+  ul.sup a:hover{border-color:var(--navy);box-shadow:0 6px 18px rgba(16,42,66,.07);}
+  ul.sup img{
+    width:100%;max-width:148px;height:40px;display:block;
+    object-fit:contain;object-position:center bottom;   /* 로고 밑단을 한 줄로 */
+    transform-origin:center bottom;
+  }
+  #cs ul.sup img{transform:scale(.8);}
+
+  /* OUR VALUES */
+  .valuesX{position:relative;overflow:hidden;background:#F2F1ED;margin-top:56px;}
+  .vx{position:relative;z-index:1;padding:54px 40px 58px;}
+  .vxEyebrow{display:flex;align-items:center;gap:14px;margin:0 0 16px;font-family:var(--label);font-weight:700;font-size:12.5px;letter-spacing:.18em;color:var(--red);}
+  .vxEyebrow i{display:block;width:84px;height:1px;background:var(--red);}
+  .valuesX h2{margin:0 0 12px;font-size:clamp(25px,3.7vw,39px);font-weight:700;letter-spacing:-.04em;color:var(--navy-deep);line-height:1.25;}
+  .vxLead{margin:0 0 44px;font-size:16px;color:#4A5B6B;}
+  .vxGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(224px,1fr));gap:0;}
+  .vxGrid article{padding:0 30px;border-left:1px solid #D7D4CD;}
+  .vxGrid article:first-child{padding-left:0;border-left:0;}
+  .vxGrid .n{margin:0 0 20px;font-family:var(--label);font-weight:700;font-size:13px;color:var(--red);letter-spacing:.06em;}
+  .vxGrid .ic{width:54px;height:54px;display:block;margin-bottom:24px;color:var(--navy-deep);}
+  .vxGrid h3{margin:0 0 5px;font-size:clamp(25px,3vw,31px);font-weight:700;letter-spacing:-.03em;color:var(--navy-deep);line-height:1.1;}
+  .vxGrid .en{margin:0 0 20px;font-family:var(--label);font-size:12.5px;font-weight:500;letter-spacing:.22em;color:#8E99A4;}
+  .vxGrid .d{margin:0;font-size:15.5px;line-height:1.75;color:#4A5B6B;}
+  .vxDeco{position:absolute;top:-70px;right:-90px;width:420px;height:420px;color:#C7C3BA;pointer-events:none;z-index:0;}
+  @media (max-width:760px){
+    .vxGrid article{padding:28px 0 0;border-left:0;border-top:1px solid #D7D4CD;}
+    .vxGrid article:first-child{padding-top:0;border-top:0;}
+    .vxDeco{display:none;}
+    .vx{padding:38px 22px 42px;}
+  }
+
+  /* 로고 크기 보정 */
+  ul.sup img[src$="logo-bauer.png"]{max-width:168px;transform:scale(1.12);}
+  ul.sup img[src$="logo-tdrill.png"]{transform:scale(.85);}
+  #cs ul.sup img[src$="logo-utp.png"]{transform:scale(1.45);}
+  ul.sup img[src$="logo-orbitalum.png"],
+  ul.sup img[src$="logo-transfluid.png"]{transform:translateY(9px);}
+  ul.sup .nm{font-size:20px;font-weight:700;letter-spacing:.02em;color:#2C3E50;align-self:end;line-height:1;}
+  ul.sup .mt{font-size:15px;color:var(--muted);text-align:center;line-height:1.4;align-self:start;}
 
   .request{margin-top:72px;background:var(--blue);}
   .reqGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;padding-block:56px;align-items:start;}
@@ -247,6 +291,65 @@
   form.req .agree{display:flex;gap:9px;align-items:flex-start;font-size:13px;color:#2C4A66;}
   form.req .agree input{width:16px;height:16px;margin-top:4px;flex:0 0 auto;}
   .formNote{margin:6px 0 0;font-size:12.5px;color:#2C4A66;}
+  .formNote a{color:#1F4E78;}
+  form.req .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+  form.req .req-mark{color:var(--red);margin-left:3px;}
+  form.req button[disabled]{opacity:.6;cursor:default;}
+  .reqDone{
+    background:#fff;border:1px solid #BFD6EA;padding:30px 28px;
+  }
+  .reqDone h3{margin:0 0 10px;font-size:20px;font-weight:600;color:var(--navy-deep);}
+  .reqDone p{margin:0 0 8px;font-size:15px;color:#2C4A66;}
+  .reqDone p.small{font-size:13.5px;color:#4A6B86;margin-top:14px;}
+  .reqErr{margin:6px 0 0;font-size:13px;color:var(--red);font-weight:500;}
+
+  /* 개인정보처리방침 */
+  .pvBody{max-width:860px;margin:0 auto;}
+  .pvBody section{padding-block:34px 0;}
+  .pvBody h2{margin:0 0 14px;font-size:19px;font-weight:600;color:var(--navy-deep);letter-spacing:-.015em;}
+  .pvBody p{margin:0 0 12px;font-size:15.5px;color:var(--body);line-height:1.85;}
+  .pvBody ul{margin:0 0 12px;padding-left:19px;}
+  .pvBody li{font-size:15.5px;color:var(--body);line-height:1.85;margin-bottom:5px;}
+  .pvBody table{width:100%;border-collapse:collapse;margin:4px 0 14px;font-size:14.5px;}
+  .pvBody th,.pvBody td{border:1px solid var(--rule);padding:10px 12px;text-align:left;vertical-align:top;color:var(--body);}
+  .pvBody th{background:var(--blue);color:var(--navy-deep);font-weight:600;white-space:nowrap;}
+  .pvBody .note{background:var(--fill);padding:18px 20px;font-size:14.5px;color:var(--body);line-height:1.8;}
+  .pvBody .eff{margin-top:34px;padding-top:20px;border-top:1px solid var(--rule);font-size:14.5px;color:var(--muted);}
+  .footLinks{
+    margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12);
+    display:flex;flex-wrap:wrap;gap:8px 26px;
+  }
+  .footLinks a{font-size:13.5px;color:#D4E4F3;text-decoration:none;}
+  .footLinks a:hover{color:#fff;text-decoration:underline;}
+  .footLinks a.em{color:#79B4E8;font-weight:600;}
+
+  /* 공지사항 */
+  .nWrap{padding-block:0 84px;}
+  .nList{list-style:none;margin:0;padding:0;border-top:2px solid var(--navy);}
+  .nList li{border-bottom:1px solid var(--rule);}
+  .nList a{
+    display:flex;flex-wrap:wrap;gap:6px 22px;align-items:baseline;
+    padding:20px 4px;text-decoration:none;color:var(--ink);
+  }
+  .nList a:hover{background:var(--fill);}
+  .nList .d{font-family:var(--mono);font-size:13px;color:var(--muted);flex:0 0 auto;min-width:94px;}
+  .nList .t{font-size:16.5px;font-weight:500;letter-spacing:-.01em;}
+  .nList a:hover .t{color:var(--navy);}
+  .nEmpty{padding:34px 4px;font-size:15px;color:var(--muted);border-bottom:1px solid var(--rule);}
+  .nView{max-width:800px;margin:0 auto;}
+  .nView .nTop{padding-bottom:20px;border-bottom:2px solid var(--navy);}
+  .nView h1{margin:8px 0 0;font-size:clamp(22px,3.2vw,30px);font-weight:600;line-height:1.4;letter-spacing:-.02em;color:var(--navy-deep);}
+  .nView .nDate{margin:0;font-family:var(--mono);font-size:13px;color:var(--muted);}
+  .nBody{padding-top:26px;}
+  .nBody p{margin:0 0 16px;font-size:16px;color:var(--body);line-height:1.9;}
+  .nBody h3{margin:30px 0 12px;font-size:18px;font-weight:600;color:var(--navy-deep);}
+  .nBody ul{margin:0 0 16px;padding-left:19px;}
+  .nBody li{font-size:16px;color:var(--body);line-height:1.9;margin-bottom:4px;}
+  .nBody a{color:var(--navy);}
+  .nBody .nFig{margin:22px 0;}
+  .nBody .nFig img{width:100%;height:auto;display:block;}
+  .nBody .nFig figcaption{margin:9px 0 0;font-size:13px;color:var(--muted);}
+  .nFoot{margin-top:40px;padding-top:22px;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:10px;}
 
   ul.news{list-style:none;margin:0;padding:0;}
   ul.news li{border-bottom:1px solid var(--rule);}
@@ -255,18 +358,21 @@
   ul.news .d{font-family:var(--label);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;flex:0 0 auto;}
   ul.news .t{font-size:16px;flex:1 1 240px;}
 
-  footer.site{border-top:1px solid var(--rule);background:#F7F8FA;margin-top:72px;}
-  footer.site .inner{padding-block:44px 52px;}
-  footer.site img{height:24px;width:auto;display:block;margin-bottom:22px;}
-  .finfo{display:flex;flex-wrap:wrap;gap:10px 44px;font-size:13.5px;color:var(--body);}
+  footer.site{background:#0D1E2D;color:#fff;margin-top:72px;}
+  footer.site .inner{padding-block:34px 34px;}
+  .fmark{display:flex;align-items:center;gap:9px;margin-bottom:14px;}
+  .fmark img{height:21px;width:auto;display:block;}
+  .fmark span{font-size:17px;font-weight:700;letter-spacing:-.03em;color:#fff;line-height:1;}
+  .fmark span em{font-size:.8em;font-style:normal;}
+  .finfo{display:flex;flex-wrap:wrap;gap:4px 40px;font-size:13.5px;color:#9FB4C6;line-height:1.6;}
   .finfo p{margin:0;}
-  .copy{margin:24px 0 0;font-family:var(--label);font-size:12px;letter-spacing:.05em;color:#767676;}
+  .copy{margin:16px 0 0;font-family:var(--label);font-size:12px;letter-spacing:.04em;color:#6E8699;}
 
 
   /* supplier detail */
   .supDetail{padding-block:34px 76px;}
   .backLink{display:inline-flex;align-items:center;gap:7px;min-height:44px;font-size:14.5px;text-decoration:none;color:var(--navy);font-weight:500;}
-  .supDetail .dlogo{height:52px;width:auto;display:block;margin:22px 0 20px;}
+  .supDetail .dlogo{max-height:44px;max-width:230px;height:auto;width:auto;display:block;margin:22px 0 20px;}
   .supDetail .dname{margin:0;font-family:var(--label);font-size:15px;letter-spacing:.02em;font-weight:700;color:var(--muted);}
   .supDetail h1{margin:10px 0 18px;font-size:clamp(23px,3.4vw,33px);line-height:1.38;font-weight:500;letter-spacing:-.02em;color:var(--navy-deep);max-width:24ch;}
   .supDetail p.dintro{margin:0 0 22px;font-size:16.5px;color:var(--body);max-width:72ch;}
@@ -295,11 +401,13 @@
   .ceoBody p.greet{font-size:18px;color:var(--ink);font-weight:500;margin-bottom:24px;}
   .ceoBody p.closing{margin-top:26px;}
   .sign{margin-top:34px;padding-top:24px;border-top:1px solid var(--rule);}
-  .sign .co{margin:0;font-size:15px;color:var(--body);}
-  .sign .who{margin:7px 0 0;font-size:19px;font-weight:700;color:var(--ink);letter-spacing:-.01em;}
+  .sign .co{margin:0;font-size:17.5px;color:var(--body);}
+  .sign .who{margin:2px 0 0;font-size:19px;color:var(--ink);letter-spacing:-.01em;display:flex;align-items:baseline;gap:9px;}
+  .sign .who .t{font-size:16px;font-weight:400;color:var(--body);}
+  .sign .who .n{font-size:23px;font-weight:700;}
   .sign .autograph{
-    display:block;margin:14px 0 0;
-    width:min(252px,72%);height:auto;
+    display:block;margin:12px 0 0;
+    width:min(176px,50%);height:auto;
   }
 
 
@@ -312,22 +420,35 @@
   .catHead h1{margin:0 0 14px;font-size:clamp(28px,4.4vw,44px);font-weight:400;letter-spacing:-.03em;line-height:1.25;}
   .catHead p{margin:0;font-size:16px;color:#D4E4F3;max-width:58ch;font-weight:300;}
   .catGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;margin-top:40px;}
-  .catCard{display:flex;flex-direction:column;gap:14px;padding:26px 24px 22px;border:1px solid var(--rule);background:#fff;text-decoration:none;color:var(--ink);transition:border-color .15s ease,box-shadow .15s ease;}
+  .catCard{display:flex;flex-direction:column;gap:9px;padding:22px 22px 18px;border:1px solid var(--rule);background:#fff;text-decoration:none;color:var(--ink);transition:border-color .15s ease,box-shadow .15s ease;}
   .catCard:hover{border-color:var(--navy);box-shadow:0 8px 22px rgba(16,42,66,.08);}
-  .catCard .lw{height:54px;display:flex;align-items:center;}
-  .catCard img{max-width:170px;max-height:54px;width:auto;height:auto;display:block;}
+  .catCard .lw{height:64px;display:flex;align-items:center;}
+  /* 로고 글자 크기를 T-DRILL 기준에 맞춥니다. 폭은 글자 높이로 환산한 값입니다. */
+  .catCard img{width:auto;height:auto;max-width:100%;display:block;}
+  .catCard img[src$="logo-bauer.png"]{width:248px;}
+  .catCard img[src$="logo-bedra.png"]{width:106px;}
+  .catCard img[src$="logo-efco.png"]{width:90px;}
+  .catCard img[src$="logo-gbc.png"]{width:188px;}
+  .catCard img[src$="logo-lsn.png"]{width:76px;}
+  .catCard img[src$="logo-orbitalum.png"]{width:227px;}
+  .catCard img[src$="logo-polysoude.png"]{width:248px;}
+  .catCard img[src$="logo-safra.png"]{width:118px;}
+  .catCard img[src$="logo-tdrill.png"]{width:164px;}
+  .catCard img[src$="logo-transfluid.png"]{width:142px;}
+  .catCard img[src$="logo-utp.png"]{width:91px;}
+  .catCard img[src$="logo-vac.png"]{width:67px;}
   .catCard .cn{font-size:17px;font-weight:700;}
-  .catCard .ct{font-size:15px;color:var(--navy-deep);line-height:1.5;}
-  .catCard .ca{font-size:13.5px;color:var(--muted);line-height:1.6;}
-  .catCard .cmore{margin-top:auto;padding-top:12px;font-size:13.5px;font-weight:500;color:var(--navy);}
+  .catCard .ct{margin-top:3px;font-size:15px;font-weight:500;color:var(--navy-deep);line-height:1.55;}
+  .catCard .ca{font-size:13px;color:var(--muted);line-height:1.55;}
+  .catCard .cmore{margin-top:auto;padding-top:14px;font-size:13px;font-weight:500;color:var(--navy);}
 
 
   /* 회사개요 · 오시는 길 */
   .pgHead{background:var(--navy);color:#fff;padding-block:50px 44px;}
   .pgHead .backLink{color:#C8DCF0;}
   .pgHead .kt{margin:20px 0 11px;font-family:var(--label);font-weight:600;font-size:13.5px;letter-spacing:.1em;color:#9FC4E6;}
-  .pgHead h1{margin:0 0 12px;font-size:clamp(27px,4.2vw,42px);font-weight:400;letter-spacing:-.03em;line-height:1.25;}
-  .pgHead p{margin:0;font-size:16px;color:#D4E4F3;max-width:56ch;font-weight:300;}
+  .pgHead h1{margin:0;font-size:clamp(27px,4.2vw,42px);font-weight:400;letter-spacing:-.03em;line-height:1.25;}
+  .pgHead p{margin:12px 0 0;font-size:16px;color:#D4E4F3;max-width:56ch;font-weight:300;}
   .pgBody{padding-block:0 84px;}
   .blk{padding-block:56px 0;}
   .blk .eb{margin:0 0 11px;font-family:var(--label);font-weight:600;font-size:13px;letter-spacing:.09em;color:var(--red);}
@@ -336,10 +457,6 @@
   .splitB{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:40px;align-items:center;}
   .splitB img{width:100%;height:auto;display:block;}
   .cap{margin:10px 0 0;font-size:13px;color:var(--muted);}
-  .statRow{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:44px;}
-  .statRow div{background:#fff;padding:26px 24px;}
-  .statRow b{display:block;font-size:24px;font-weight:500;color:var(--navy-deep);letter-spacing:-.01em;}
-  .statRow span{display:block;margin-top:6px;font-size:13.5px;color:var(--muted);}
   .col3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:0 36px;}
   .col3 article{border-top:2px solid var(--navy);padding:22px 0 28px;}
   .col3 h3{margin:0 0 9px;font-size:18px;font-weight:500;}
@@ -368,12 +485,61 @@
   .addr{margin:22px 0 16px;font-size:18px;font-weight:500;color:var(--ink);}
   .acts{display:flex;flex-wrap:wrap;gap:10px;}
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
-  .branch .bh{margin:0 0 6px;font-size:clamp(21px,3vw,29px);font-weight:500;letter-spacing:-.02em;color:var(--navy-deep);}
+  .branch .bh{margin:0;font-size:clamp(21px,3vw,29px);font-weight:500;letter-spacing:-.02em;color:var(--navy-deep);}
   .branch .bs{margin:0;font-size:15.5px;color:var(--body);}
 
   :focus-visible{outline:2px solid var(--red);outline-offset:2px;}
   @media (prefers-reduced-motion:reduce){
     .stage video,.stage img{transition:none;}
+  }
+
+  /* 보유재고 */
+  .vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+    clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;}
+  .stTools{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:34px;}
+  .stSearch{position:relative;flex:1 1 280px;min-width:220px;}
+  .stSearch input{width:100%;padding:12px 14px;font:inherit;font-size:15.5px;color:var(--ink);
+    background:#fff;border:1px solid #C6CFD7;border-radius:0;}
+  .stSearch input:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(31,78,120,.12);}
+  .stMaker{display:flex;flex-wrap:wrap;gap:7px;}
+  .stMaker button{font:inherit;font-size:14px;line-height:1;padding:10px 14px;cursor:pointer;
+    color:var(--body);background:#fff;border:1px solid var(--rule);border-radius:0;}
+  .stMaker button:hover{border-color:var(--navy);color:var(--navy);}
+  .stMaker button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff;}
+  .stCount{margin:16px 0 0;font-size:14.5px;color:var(--muted);}
+  .stCount b{color:var(--ink);font-weight:600;}
+  .stWrap{margin-top:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  table.stock{width:100%;border-collapse:collapse;font-size:15px;min-width:880px;}
+  table.stock th{background:var(--blue);color:var(--navy-deep);font-weight:600;font-size:14px;
+    text-align:left;white-space:nowrap;padding:13px 14px;border-bottom:1px solid #C3D7EA;}
+  table.stock td{padding:15px 14px;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--body);}
+  table.stock tr:hover td{background:#FAFBFC;}
+  table.stock td.c{font-family:var(--mono);font-size:13.5px;color:var(--muted);white-space:nowrap;}
+  table.stock td.m{color:var(--ink);font-weight:500;white-space:nowrap;}
+  table.stock td.nm{color:var(--ink);}
+  table.stock td.q{white-space:nowrap;font-weight:600;color:var(--ink);}
+  table.stock td.q span{font-weight:400;color:var(--muted);margin-left:3px;}
+  table.stock td.y{white-space:nowrap;color:var(--muted);}
+  table.stock td.rq{text-align:right;white-space:nowrap;}
+  .stAsk{font:inherit;font-size:13.5px;line-height:1;cursor:pointer;white-space:nowrap;
+    padding:10px 14px;color:#fff;background:var(--navy);border:1px solid var(--navy);}
+  .stAsk:hover{background:var(--navy-deep);border-color:var(--navy-deep);}
+  .stEmpty{margin:0;padding:38px 4px;border-top:1px solid var(--rule);color:var(--muted);font-size:15px;}
+  .stCard{display:none;}
+
+  @media (max-width:820px){
+    .stWrap{overflow:visible;}
+    table.stock{display:none;}
+    .stCard{display:block;border-top:1px solid var(--rule);}
+    .stCard article{padding:18px 2px;border-bottom:1px solid var(--rule);}
+    .stCard .hd{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;}
+    .stCard .mk{font-size:14px;font-weight:600;color:var(--navy);}
+    .stCard .cd{font-family:var(--mono);font-size:12.5px;color:var(--muted);}
+    .stCard h3{margin:5px 0 0;font-size:16.5px;font-weight:600;color:var(--ink);line-height:1.45;}
+    .stCard dl{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin:10px 0 0;font-size:14.5px;}
+    .stCard dt{color:var(--muted);}
+    .stCard dd{margin:0;color:var(--body);}
+    .stCard .stAsk{margin-top:14px;}
   }
 
   /* 좁은 화면 마무리 — 반드시 스타일시트 끝에 둘 것 */
@@ -385,7 +551,6 @@
     .tab .l{font-size:14px;}
     .values{padding:30px 20px;}
     .callout{padding:24px 20px;}
-    .statRow div{padding:20px 18px;}
     .pgHead{padding-block:34px 30px;}
     .blk{padding-block:40px 0;}
     .branch{padding-block:38px 0;}
@@ -393,12 +558,11 @@
     .pgBody{padding-block:0 60px;}
     .values{margin-top:40px;}
     .callout{margin-top:40px;}
-    .statRow{margin-top:32px;}
-    ul.sup{padding:12px;gap:6px;grid-template-columns:repeat(auto-fit,minmax(142px,1fr));}
-    ul.sup a{padding:18px 8px;gap:10px;min-height:120px;grid-template-rows:46px auto;}
-    ul.sup img{max-width:132px;}
-    ul.sup .nm{font-size:18px;}
-    ul.sup .mt{font-size:14.5px;}
+    ul.sup{padding:0;gap:8px;grid-template-columns:repeat(auto-fit,minmax(142px,1fr));}
+    ul.sup a{padding:22px 8px 14px;gap:9px;grid-template-rows:34px auto;}
+    ul.sup img{max-width:124px;height:34px;}
+    ul.sup .nm{font-size:17px;}
+    ul.sup .mt{font-size:14px;}
   }
 </style>
 </head>
@@ -407,7 +571,7 @@
 
 <header class="site">
   <div class="wrap bar">
-    <a class="logo" href="#top" aria-label="주식회사 케미코 홈"><img src="assets/mark.png" alt=""><span class="wordmark">주식회사 케미코</span></a>
+    <a class="logo" href="#top" aria-label="주식회사 케미코 홈"><img src="assets/mark.png" alt=""><span class="wordmark"><em>주식회사</em> 케미코</span></a>
     <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="mainnav" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
     <nav id="mainnav" aria-label="주 메뉴">
       <div class="navItem">
@@ -425,10 +589,11 @@
           <li><a href="#p/consumable">Consumable</a></li>
         </ul>
       </div>
-      <a href="#news">공지사항</a>
+      <a href="#p/stock">보유재고</a>
+      <a href="#p/news">공지사항</a>
     </nav>
     <div class="util">
-      <a class="lang" href="#top">KO / EN</a>
+      <span class="lang"><b>KO</b> <span class="sep">/</span> <a href="en/">EN</a></span>
       <a class="btn" href="#request">자료·견적 요청</a>
     </div>
   </div>
@@ -440,7 +605,6 @@
     <a class="backLink" href="#top">&larr; 홈</a>
     <p class="kt">ABOUT US</p>
     <h1>회사개요</h1>
-    <p>산업 현장에 필요한 기술, 케미코가 함께합니다.</p>
   </div></section>
 
   <div class="wrap pgBody">
@@ -454,13 +618,8 @@
         </div>
         <figure style="margin:0">
           <img src="assets/about/seoul.jpg" alt="케미코 서울본사 청록빌딩 외관">
-          <figcaption class="cap">서울본사 · 청록빌딩</figcaption>
+          <figcaption class="cap">서울본사</figcaption>
         </figure>
-      </div>
-      <div class="statRow">
-        <div><b>1976</b><span>케미코의 시작</span></div>
-        <div><b>서울본사</b><span>글로벌 기술과 고객을 연결</span></div>
-        <div><b>평택지사</b><span>R&amp;D Center</span></div>
       </div>
     </section>
 
@@ -479,20 +638,27 @@
       <h2>기술을 직접 보고, 경험하는 공간</h2>
       <p>평택지사는 장비 시연과 교육, 유지보수 및 수리를 위한 기술 지원 거점입니다. 다양한 장비를 직접 확인하고 활용 방법을 살펴볼 수 있는 공간을 갖추고 있습니다.</p>
       <div class="gal2">
-        <figure><img src="assets/about/pt-office.jpg" alt="케미코 평택지사 사옥 외관"><figcaption>평택지사 사옥</figcaption></figure>
-        <figure><img src="assets/about/pt-cut.jpg" alt="평택지사 절단 및 오비탈 용접 장비 전시 공간"><figcaption>절단 · 오비탈 용접 장비</figcaption></figure>
+        <figure><img src="assets/about/pt-office.jpg" alt="케미코 평택지사 사옥 외관"></figure>
+        <figure><img src="assets/about/pt-cut.jpg" alt="평택지사 절단 및 오비탈 용접 장비 전시 공간"></figure>
       </div>
       <figure class="wideFig">
         <img class="wideImg" src="assets/about/pt-hall.jpg" alt="케미코 평택지사 장비 전시장 전경">
-        <figcaption>평택지사 전시장 전경</figcaption>
       </figure>
     </section>
 
-    <section class="values">
-      <p class="eb">OUR VALUES</p>
-      <h2>정직 · 정확 · 정도</h2>
-      <p>신뢰를 지키는 정직한 소통, 정확한 정보와 기술 검토, 기본과 원칙을 지키는 자세로 고객과 오래 함께하겠습니다.</p>
-    </section>
+<section class="valuesX">
+<svg class="vxDeco" viewBox="0 0 420 420" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="300" cy="120" r="190" stroke-width="1"/><circle cx="300" cy="120" r="138" stroke-width="1" stroke-dasharray="4 6"/><circle cx="300" cy="120" r="88" stroke-width="1"/><circle cx="300" cy="120" r="46" stroke-width="1" stroke-dasharray="4 6"/><path d="M300 -80V330M100 120h300" stroke-width="1" stroke-dasharray="4 6"/><rect x="294" y="114" width="12" height="12" fill="#BF1E2D" stroke="none"/></svg>
+  <div class="vx">
+    <p class="vxEyebrow">OUR VALUES<i></i></p>
+    <h2>기술을 넘어, 신뢰를 지킵니다.</h2>
+    <p class="vxLead">케미코가 고객과의 모든 약속에서 지켜온 세 가지 원칙입니다.</p>
+    <div class="vxGrid">
+      <article><p class="n">01</p><svg class="ic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h30a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H15l-8 7v-7H4a3 3 0 0 1-3-3V12a3 3 0 0 1 3-3z"/><circle cx="12" cy="19" r="1.7" fill="currentColor" stroke="none"/><circle cx="19.5" cy="19" r="1.7" fill="currentColor" stroke="none"/><circle cx="27" cy="19" r="1.7" fill="currentColor" stroke="none"/><path d="M33 25h27a3 3 0 0 1 3 3v15a3 3 0 0 1-3 3h-3v7l-8-7H33a3 3 0 0 1-3-3V28a3 3 0 0 1 3-3z" fill="#F2F1ED"/></svg><h3>정직</h3><p class="en">INTEGRITY</p><p class="d">사실에 기반한 소통으로<br>고객의 신뢰를 쌓습니다.</p></article>
+      <article><p class="n">02</p><svg class="ic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="32" cy="32" r="19"/><circle cx="32" cy="32" r="10.5"/><circle cx="32" cy="32" r="3.2" fill="currentColor" stroke="none"/><path d="M32 3v10M32 51v10M3 32h10M51 32h10"/></svg><h3>정확</h3><p class="en">ACCURACY</p><p class="d">정확한 정보와 기술 검토로<br>최적의 선택을 돕습니다.</p></article>
+      <article><p class="n">03</p><svg class="ic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="32" cy="32" r="27"/><circle cx="32" cy="32" r="20.5"/><path d="M42 22 36.5 36.5 22 42l5.5-14.5z"/><circle cx="32" cy="32" r="1.9" fill="currentColor" stroke="none"/><path d="M32 5v4M32 55v4M5 32h4M55 32h4"/></svg><h3>정도</h3><p class="en">PRINCIPLES</p><p class="d">기본과 원칙을 지키며<br>책임 있게 함께합니다.</p></article>
+    </div>
+  </div>
+</section>
 
     <div class="callout">
       <div>
@@ -509,14 +675,12 @@
     <a class="backLink" href="#top">&larr; 홈</a>
     <p class="kt">LOCATIONS</p>
     <h1>오시는 길</h1>
-    <p>서울본사와 평택지사에서 만나 뵙겠습니다.</p>
   </div></section>
 
   <div class="wrap pgBody">
     <section class="branch">
       <p class="eb">SEOUL HEAD OFFICE</p>
       <h2 class="bh">서울본사</h2>
-      <p class="bs">글로벌 파트너와 고객을 연결하는 케미코의 본사</p>
       <div class="visitGrid">
         <img src="assets/about/seoul.jpg" alt="케미코 서울본사 청록빌딩 외관">
         <div class="mapBox"><p>[지도가 들어갈 자리]<br>시험용 페이지에서는 지도가 표시되지 않습니다.<br>아래 네이버·카카오 버튼은 동작합니다.</p></div>
@@ -532,7 +696,6 @@
     <section class="branch">
       <p class="eb">PYEONGTAEK R&amp;D CENTER</p>
       <h2 class="bh">평택지사</h2>
-      <p class="bs">장비 시연 · 교육 · 유지보수 및 수리</p>
       <div class="visitGrid">
         <img src="assets/about/pt-exterior.jpg" alt="케미코 평택지사 외관">
         <div class="mapBox"><p>[지도가 들어갈 자리]<br>시험용 페이지에서는 지도가 표시되지 않습니다.<br>아래 네이버·카카오 버튼은 동작합니다.</p></div>
@@ -574,7 +737,7 @@
           <p>감사합니다.</p>
           <div class="sign">
             <p class="co">주식회사 케미코</p>
-            <p class="who">대표이사 하수진</p>
+            <p class="who"><span class="t">대표이사</span><span class="n">하수진</span></p>
             <img class="autograph" src="assets/signature.png" alt="대표이사 하수진 서명">
           </div>
         </div>
@@ -583,16 +746,124 @@
   </section>
 </div>
 
+<div id="privacyPage" hidden>
+  <section class="pgHead"><div class="wrap">
+    <a class="backLink" href="#top">&larr; 홈</a>
+    <p class="kt">PRIVACY POLICY</p>
+    <h1>개인정보처리방침</h1>
+    <p>주식회사 케미코는 이용자의 개인정보를 소중히 다루며 관계 법령을 준수합니다.</p>
+  </div></section>
+
+  <div class="wrap pgBody"><div class="pvBody">
+    <section>
+      <h2>1. 수집하는 개인정보 항목과 수집 방법</h2>
+      <p>케미코는 홈페이지의 자료·견적 요청 양식을 통해 아래 항목을 수집합니다.</p>
+      <table>
+        <tr><th>수집 시점</th><td>자료·견적 요청 양식 제출 시</td></tr>
+        <tr><th>필수 항목</th><td>회사명, 담당자명, 이메일 주소, 문의 내용</td></tr>
+        <tr><th>선택 항목</th><td>연락처, 요청 파트너사, 요청 품목·자료 구분</td></tr>
+      </table>
+      <p>이용자가 직접 입력한 정보만 수집하며, 그 밖의 방법으로 개인정보를 수집하지 않습니다.</p>
+      <p>본 홈페이지는 광고 식별이나 이용자 행태 분석을 위한 쿠키 및 분석 도구를 사용하지 않습니다.</p>
+    </section>
+
+    <section>
+      <h2>2. 개인정보의 이용 목적</h2>
+      <ul>
+        <li>요청하신 제품 자료, 기술 사양서, 견적의 제공</li>
+        <li>문의 사항의 확인과 회신</li>
+        <li>요청 내용과 관련한 기술 상담 및 후속 연락</li>
+      </ul>
+      <p>수집한 개인정보는 위 목적 외의 용도로 이용하지 않습니다. 목적이 변경되는 경우 사전에 동의를 받습니다.</p>
+    </section>
+
+    <section>
+      <h2>3. 개인정보의 보유 및 이용 기간</h2>
+      <p>이용 목적이 달성되면 지체 없이 파기합니다. 다만 문의 이력 관리와 후속 상담을 위해 접수일로부터 <strong>3년간</strong> 보관한 뒤 파기합니다.</p>
+      <p>관계 법령에 따라 보존 의무가 있는 정보는 해당 법령에서 정한 기간 동안 보관합니다.</p>
+    </section>
+
+    <section>
+      <h2>4. 개인정보 처리의 위탁 및 국외 이전</h2>
+      <p>케미코는 홈페이지 운영과 문의 접수를 위해 아래와 같이 업무를 위탁하고 있으며, 해당 업체의 서버는 국외에 있습니다.</p>
+      <table>
+        <tr><th>수탁업체</th><th>위탁 업무</th><th>이전 항목</th><th>보유 기간</th></tr>
+        <tr><td>Google LLC</td><td>문의 접수 처리 및 메일 발송</td><td>제1항의 수집 항목 전체</td><td>위탁 계약 종료 시 또는 제3항의 기간까지</td></tr>
+        <tr><td>GitHub, Inc.</td><td>홈페이지 호스팅</td><td>접속 과정에서 생성되는 접속 기록</td><td>해당 업체의 정책에 따름</td></tr>
+      </table>
+      <p>위탁 업체가 변경되는 경우 본 방침을 통해 알려 드립니다.</p>
+    </section>
+
+    <section>
+      <h2>5. 개인정보의 제3자 제공</h2>
+      <p>케미코는 이용자의 개인정보를 제3자에게 제공하지 않습니다. 다만 아래의 경우는 예외로 합니다.</p>
+      <ul>
+        <li>이용자가 사전에 동의한 경우</li>
+        <li>법령에 따라 수사기관 등이 적법한 절차로 요구하는 경우</li>
+      </ul>
+      <p>요청하신 자료를 해외 제조사로부터 받아야 하는 경우에는 그 사실과 제공 범위를 미리 안내하고 동의를 받은 뒤 전달합니다.</p>
+    </section>
+
+    <section>
+      <h2>6. 정보주체의 권리와 행사 방법</h2>
+      <p>이용자는 언제든지 본인의 개인정보에 대해 열람, 정정, 삭제, 처리 정지를 요구할 수 있습니다.</p>
+      <p>아래 연락처로 서면, 전화 또는 전자우편을 통해 요청하시면 지체 없이 처리합니다. 대리인을 통한 요청도 가능하며, 이 경우 위임장을 제출해 주셔야 합니다.</p>
+      <p>개인정보 삭제를 요청하시면 요청 즉시 파기하며, 그 사실을 확인할 수 있도록 회신드립니다.</p>
+    </section>
+
+    <section>
+      <h2>7. 개인정보의 파기 절차와 방법</h2>
+      <ul>
+        <li>전자적 파일: 복구할 수 없는 방법으로 영구 삭제합니다.</li>
+        <li>종이 문서: 분쇄하거나 소각합니다.</li>
+      </ul>
+      <p>보유 기간이 끝나거나 처리 목적이 달성된 개인정보는 보관 사유가 없어진 날부터 5일 이내에 파기합니다.</p>
+    </section>
+
+    <section>
+      <h2>8. 개인정보의 안전성 확보 조치</h2>
+      <ul>
+        <li>개인정보 취급자를 업무상 필요한 최소 인원으로 제한하고 있습니다.</li>
+        <li>개인정보가 포함된 자료는 접근 권한이 통제된 공간에 보관합니다.</li>
+        <li>홈페이지와 접수 경로 전 구간에 암호화 통신(HTTPS)을 적용하고 있습니다.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>9. 개인정보 보호책임자</h2>
+      <p>케미코는 개인정보 처리에 관한 업무를 총괄하고 이용자의 문의와 불만을 처리하기 위해 아래와 같이 보호책임자를 지정하고 있습니다.</p>
+      <table>
+        <tr><th>보호책임자</th><td>대표이사 하수진</td></tr>
+        <tr><th>전자우편</th><td>chemiko@chemiko.net</td></tr>
+        <tr><th>전화</th><td>02-567-5336~9</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>10. 권익 침해에 대한 구제 방법</h2>
+      <p>개인정보 침해로 인한 상담이나 구제가 필요한 경우 아래 기관에 문의하실 수 있습니다.</p>
+      <table>
+        <tr><th>개인정보분쟁조정위원회</th><td>1833-6972 · www.kopico.go.kr</td></tr>
+        <tr><th>개인정보침해신고센터</th><td>국번없이 118 · privacy.kisa.or.kr</td></tr>
+        <tr><th>대검찰청 사이버수사과</th><td>국번없이 1301 · www.spo.go.kr</td></tr>
+        <tr><th>경찰청 사이버수사국</th><td>국번없이 182 · ecrm.police.go.kr</td></tr>
+      </table>
+    </section>
+
+    <p class="eff">본 방침은 2026년 11월 1일부터 적용됩니다.</p>
+  </div></div>
+</div>
+
 <div id="mainView">
 
 <section class="hero" id="top" aria-label="주요 영상">
   <div class="stage">
-    <video id="sh0" class="on" muted playsinline preload="auto" poster="assets/video/auto.jpg" aria-label="자동차 로봇 조립 라인"><source src="assets/video/auto.mp4" type="video/mp4"></video>
-    <video id="sh1" muted playsinline preload="none" poster="assets/video/semi1.jpg" aria-label="반도체 웨이퍼 검사"><source src="assets/video/semi1.mp4" type="video/mp4"></video>
+    <video id="sh0" muted playsinline preload="none" poster="assets/video/auto.jpg" aria-label="자동차 로봇 조립 라인"><source src="assets/video/auto.mp4" type="video/mp4"></video>
+    <video id="sh1" class="on" muted playsinline preload="auto" poster="assets/video/semi1.jpg" aria-label="반도체 웨이퍼 검사"><source src="assets/video/semi1.mp4" type="video/mp4"></video>
     <video id="sh2" muted playsinline preload="none" poster="assets/video/semi2.jpg" aria-label="반도체 칩 정밀 구조"><source src="assets/video/semi2.mp4" type="video/mp4"></video>
     <video id="sh3" muted playsinline preload="none" poster="assets/video/power.jpg" aria-label="발전 설비"><source src="assets/video/power.mp4" type="video/mp4"></video>
     <video id="sh4" muted playsinline preload="none" poster="assets/video/rig.jpg" aria-label="해양 플랜트"><source src="assets/video/rig.mp4" type="video/mp4"></video>
-    <video id="sh5" muted playsinline preload="none" poster="assets/video/sub.jpg" aria-label="잠수함 건조"><source src="assets/video/sub.mp4" type="video/mp4"></video>
+    <video id="sh5" muted playsinline preload="none" poster="assets/video/sub.jpg" aria-label="수중 잠수함"><source src="assets/video/sub.mp4" type="video/mp4"></video>
     <video id="sh6" muted playsinline preload="none" poster="assets/video/ship.jpg" aria-label="선박 건조"><source src="assets/video/ship.mp4" type="video/mp4"></video>
     <video id="sh7" muted playsinline preload="none" poster="assets/video/tech1.jpg" aria-label="정밀 로봇 조립"><source src="assets/video/tech1.mp4" type="video/mp4"></video>
     <video id="sh8" muted playsinline preload="none" poster="assets/video/tech2.jpg" aria-label="데이터센터 운영"><source src="assets/video/tech2.mp4" type="video/mp4"></video>
@@ -605,11 +876,11 @@
   <div class="wrap in">
     <p class="lab">주요 산업분야</p>
     <div class="tabRow" role="tablist" aria-label="주요 산업분야 선택">
-      <button type="button" class="tab" role="tab" aria-selected="true" data-g="0"><span class="n">01</span><span class="l">자동차</span></button>
-      <button type="button" class="tab" role="tab" aria-selected="false" data-g="1"><span class="n">02</span><span class="l">반도체</span></button>
-      <button type="button" class="tab" role="tab" aria-selected="false" data-g="2"><span class="n">03</span><span class="l">발전·에너지</span></button>
-      <button type="button" class="tab" role="tab" aria-selected="false" data-g="3"><span class="n">04</span><span class="l">방산·조선</span></button>
-      <button type="button" class="tab" role="tab" aria-selected="false" data-g="4"><span class="n">05</span><span class="l">하이테크</span></button>
+      <button type="button" class="tab" role="tab" aria-selected="true" data-g="1"><span class="n">01</span><span class="l">반도체</span></button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-g="2"><span class="n">02</span><span class="l">발전·에너지</span></button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-g="3"><span class="n">03</span><span class="l">방산·조선</span></button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-g="4"><span class="n">04</span><span class="l">하이테크</span></button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-g="0"><span class="n">05</span><span class="l">자동차</span></button>
     </div>
   </div>
 </section>
@@ -630,11 +901,11 @@
     <h3 class="supHead">EQUIPMENT <span>7 brands</span></h3>
     <ul class="sup">
       <li><a href="#s/polysoude"><img src="assets/logo-polysoude.png" alt="Polysoude"><span class="mt">오비탈 용접</span></a></li>
-      <li><a href="#s/orbitalum"><img src="assets/logo-orbitalum.png" alt="Orbitalum"><span class="mt">절단·오비탈 용접</span></a></li>
+      <li><a href="#s/orbitalum"><img src="assets/logo-orbitalum.png" alt="Orbitalum"><span class="mt">절단·단면 가공</span></a></li>
       <li><a href="#s/gbc"><img src="assets/logo-gbc.png" alt="G.B.C."><span class="mt">절단·베벨링</span></a></li>
       <li><a href="#s/transfluid"><img src="assets/logo-transfluid.png" alt="transfluid"><span class="mt">튜브 가공</span></a></li>
       <li><a href="#s/bauer"><img src="assets/logo-bauer.png" alt="Bauer Gear Motor"><span class="mt">감속기</span></a></li>
-      <li><a href="#s/tdrill"><span class="nm">T-DRILL</span><span class="mt">튜브 분기·성형</span></a></li>
+      <li><a href="#s/tdrill"><img src="assets/logo-tdrill.png" alt="T-DRILL"><span class="mt">튜브 분기·성형</span></a></li>
       <li><a href="#s/efco"><img src="assets/logo-efco.png" alt="EFCO"><span class="mt">밸브 정비 장비</span></a></li>
     </ul>
   </div>
@@ -650,37 +921,43 @@
     </ul>
   </div>
 
-  <p class="caveat">※ T-DRILL은 로고 폴더에 없어 글자로 넣었습니다. 링크도 제가 넣은 주소라 확인이 필요합니다. VAC·LSN·bedra·transfluid는 원본이 작아 확대해 쓴 상태입니다.</p>
 </section>
 
 <section class="request" id="request">
   <div class="wrap reqGrid">
     <div>
-      <h2>필요한 자료와 견적을 보내드립니다</h2>
-      <p class="lead">상세 카탈로그와 기술 사양서는 사이트에 공개하지 않습니다. 자료든 견적이든 요청해 주시면 담당자가 확인 후 회신드립니다.</p>
-      <p class="lead" style="margin-bottom:0">전화 02-562-7864 · chemiko@chemiko.net</p>
+      <h2>제품 자료와 견적을 안내해 드립니다</h2>
+      <p class="lead">필요한 제품이나 적용 공정을 알려주시면, 담당자가 검토 후 상세 카탈로그와 기술 사양, 견적을 안내해 드립니다.</p>
+      <p class="lead" style="margin-bottom:0">전화 02-567-5336~9 · chemiko@chemiko.net</p>
     </div>
-    <form class="req" onsubmit="return false">
-      <div><label for="f0">요청 구분</label>
-        <select id="f0" name="reqtype">
+    <iframe name="reqSink" id="reqSink" title="전송 처리" style="display:none;width:0;height:0;border:0"></iframe>
+    <form class="req" id="reqForm" method="POST" target="reqSink" action="">
+      <div><label for="f0">요청 구분<span class="req-mark">*</span></label>
+        <select id="f0" name="reqtype" required>
           <option>자료 요청</option><option>견적 요청</option><option>자료 + 견적 요청</option>
         </select>
       </div>
       <div class="two">
-        <div><label for="f1">회사명</label><input id="f1" name="company" type="text" autocomplete="organization"></div>
-        <div><label for="f2">담당자명</label><input id="f2" name="person" type="text" autocomplete="name"></div>
+        <div><label for="f1">회사명<span class="req-mark">*</span></label><input id="f1" name="company" type="text" autocomplete="organization" required></div>
+        <div><label for="f2">담당자명<span class="req-mark">*</span></label><input id="f2" name="person" type="text" autocomplete="name" required></div>
       </div>
       <div class="two">
-        <div><label for="f3">이메일</label><input id="f3" name="email" type="email" autocomplete="email"></div>
+        <div><label for="f3">이메일<span class="req-mark">*</span></label><input id="f3" name="email" type="email" autocomplete="email" required></div>
         <div><label for="f4">연락처</label><input id="f4" name="tel" type="tel" autocomplete="tel"></div>
       </div>
       <div class="two">
         <div><label for="f5">요청 파트너사</label>
           <select id="f5" name="supplier">
-            <option>선택해 주십시오</option>
-            <option>voestalpine Böhler</option><option>Polysoude</option><option>VAC</option>
-            <option>G.B.C.</option><option>transfluid</option><option>bedra</option>
-            <option>LSN Diffusion</option><option>Safra</option><option>Bauer Gear Motor</option><option>EFCO</option>
+            <option value="">선택해 주십시오</option>
+            <optgroup label="Equipment">
+              <option>Polysoude</option><option>Orbitalum</option><option>G.B.C.</option>
+              <option>transfluid</option><option>Bauer Gear Motor</option><option>T-DRILL</option><option>EFCO</option>
+            </optgroup>
+            <optgroup label="Consumable">
+              <option>utp (by voestalpine)</option><option>VAC</option><option>bedra</option>
+              <option>Safra</option><option>LSN Diffusion</option>
+            </optgroup>
+            <option>잘 모르겠습니다</option>
           </select>
         </div>
         <div><label for="f6">요청 품목·자료</label>
@@ -690,20 +967,26 @@
           </select>
         </div>
       </div>
-      <div><label for="f7">용도·프로젝트 및 문의 내용</label><textarea id="f7" name="message"></textarea></div>
-      <label class="agree" for="f8"><input id="f8" name="agree" type="checkbox"><span>개인정보 수집·이용에 동의합니다. 수집 항목과 보유 기간은 개인정보처리방침에 따릅니다.</span></label>
-      <button class="btn lg" type="submit" style="justify-self:start">자료·견적 요청하기</button>
-      <p class="formNote">※ 시험용 화면입니다. 지금은 제출해도 전송되지 않습니다.</p>
+      <div><label for="f7">용도·프로젝트 및 문의 내용<span class="req-mark">*</span></label><textarea id="f7" name="message" required></textarea></div>
+      <div class="hp" aria-hidden="true"><label for="f9">이 칸은 비워 두십시오</label><input id="f9" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+      <label class="agree" for="f8"><input id="f8" name="agree" type="checkbox" value="동의" required><span>개인정보 수집·이용에 동의합니다. 수집 항목과 보유 기간은 <a href="#p/privacy">개인정보처리방침</a>을 따릅니다.</span></label>
+      <button class="btn lg" id="reqBtn" type="submit" style="justify-self:start">자료·견적 요청하기</button>
+      <p class="reqErr" id="reqErr" hidden></p>
+      <p class="formNote" id="reqNote">영업일 기준 1~2일 안에 담당자가 회신드립니다.</p>
     </form>
+    <div class="reqDone" id="reqDone" hidden>
+      <h3>요청이 접수되었습니다</h3>
+      <p>담당자가 확인한 뒤 영업일 기준 1~2일 안에 회신드리겠습니다.</p>
+      <p>급하신 경우 전화 02-567-5336~9로 연락 주십시오.</p>
+      <p class="small">회신이 오지 않으면 메일함의 스팸함을 함께 확인해 주십시오.</p>
+    </div>
   </div>
 </section>
 
 <section class="block wrap" id="news">
-  <div class="rowHead"><p>공지사항</p><a href="#news">전체 보기</a></div>
+  <div class="rowHead"><p>공지사항</p><a href="#p/news">전체 보기</a></div>
   <ul class="news">
-    <li><a href="#news"><span class="d">2026.00.00</span><span class="t">[공지 제목이 들어갑니다]</span></a></li>
-    <li><a href="#news"><span class="d">2026.00.00</span><span class="t">[전시회 참가 안내 등]</span></a></li>
-    <li><a href="#news"><span class="d">2026.00.00</span><span class="t">[채용 공고 등]</span></a></li>
+    <li><span style="display:block;padding:16px 4px;font-size:15px;color:var(--muted)">불러오는 중입니다.</span></li>
   </ul>
 </section>
 
@@ -711,24 +994,32 @@
 
 <footer class="site" id="company">
   <div class="wrap inner">
-    <img src="assets/logo.png" alt="케미코">
+    <div class="fmark"><img src="assets/mark.png" alt=""><span><em>주식회사</em> 케미코</span></div>
     <div class="finfo">
       <p>주식회사 케미코 · 대표 하수진</p>
       <p>서울특별시 강남구 테헤란로38길 43, 청록빌딩</p>
-      <p>Tel 02-562-7864</p>
+      <p>Tel 02-567-5336~9</p>
       <p>chemiko@chemiko.net</p>
-      <p>사업자등록번호 220-81-16217</p>
     </div>
-    <p class="copy">© 2026 CHEMIKO CO., LTD.</p>
+    <div class="footLinks">
+      <a class="em" href="#p/privacy">개인정보처리방침</a>
+      <a href="#p/overview">회사개요</a>
+      <a href="#p/directions">오시는 길</a>
+      <a href="#p/stock">보유재고</a>
+      <a href="#request">자료·견적 요청</a>
+    </div>
+    <p class="copy">Copyright (C) 2026 CHEMIKO CO., LTD. All rights reserved</p>
   </div>
 </footer>
 
 <script>
 (function(){
-  var GRP = [0, 1, 1, 2, 2, 3, 3, 4, 4, 4];
-  var slides = GRP.map(function(_,i){ return document.getElementById('sh'+i); });
+  var ORD = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];   /* 재생 순서: 자동차(sh0)를 맨 뒤로 */
+  var GRP = [1, 1, 2, 2, 3, 3, 4, 4, 4, 0];
+  var slides = ORD.map(function(i){ return document.getElementById('sh'+i); });
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
   var cur = 0, timer = null, armed = false;
+  var CLIP = 4.5;   /* 영상 한 편당 노출 시간(초) */
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Muted autoplay can still be refused inside an embedded frame.
@@ -750,7 +1041,7 @@
     var el = slides[n];
     cur = n;
     stop();
-    tabs.forEach(function(t,i){ t.setAttribute('aria-selected', i===GRP[n] ? 'true' : 'false'); });
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', parseInt(t.getAttribute('data-g'),10)===GRP[n] ? 'true' : 'false'); });
     if(!el) return;
     try{ el.currentTime = 0; }catch(e){}
 
@@ -767,19 +1058,21 @@
     try{ pr = el.play(); }catch(e){}
     if(pr && pr.then){ pr.then(reveal).catch(function(){ arm(); reveal(); }); } else { reveal(); }
 
-    var nx = slides[(n+1)%slides.length];
-    if(nx && nx.getAttribute('preload') !== 'auto'){
-      nx.setAttribute('preload','auto');
-      try{ nx.load(); }catch(e){}
-    }
+    [1, 2].forEach(function(k){
+      var nx = slides[(n+k)%slides.length];
+      if(nx && nx.getAttribute('preload') !== 'auto'){
+        nx.setAttribute('preload','auto');
+        try{ nx.load(); }catch(e){}
+      }
+    });
   }
   // 영상이 끝나면 넘어가고, 타이머는 멈췄을 때만 쓰는 예비 수단
   function start(){
     if(reduce) return;
     stop();
     var el = slides[cur];
-    var d = (el && isFinite(el.duration) && el.duration > 0) ? el.duration : 12;
-    timer = setTimeout(function(){ show((cur+1)%slides.length); }, (d + 4) * 1000);
+    var wait = (el && isFinite(el.duration) && el.duration > 0) ? Math.min(CLIP, el.duration) : CLIP;
+    timer = setTimeout(function(){ show((cur+1)%slides.length); }, wait * 1000);
   }
   function stop(){ if(timer){ clearTimeout(timer); timer = null; } }
 
@@ -802,10 +1095,354 @@
 
 <script>
 (function(){
-  var SUP = {"utp":{"name":"voestalpine Böhler Welding","tagline":"접합부터 보수까지, 용도에 맞는 용접 솔루션","intro":"voestalpine Böhler Welding은 접합 용접, 보수·표면 보호 및 브레이징을 위한 폭넓은 용접재료를 제공합니다. Böhler Welding, UTP, Fontargen Brazing 브랜드의 전문성을 바탕으로 소재와 사용 환경에 적합한 솔루션을 제안하며, 제조 품질과 설비 수명 향상을 지원합니다.","tags":["Böhler Welding 접합 용접재료","UTP 보수·표면 보호용 용접재료","Fontargen Brazing 브레이징 재료"],"appl":"발전 · 조선 · 석유화학 · 시멘트·광업 · 일반 제조","site":"https://www.voestalpine.com/welding/global-en/","logo":"assets/logo-utp.png","figs":[{"f":"assets/sup/bohler-1.jpg","t":"01 · 용접재료 제품군","s":"https://www.voestalpine.com/welding/global-en/products/consumables/"},{"f":"assets/sup/bohler-2.jpg","t":"02 · 브레이징 재료 제품군","s":"https://www.voestalpine.com/welding/global-en/products/consumables/"},{"f":"assets/sup/bohler-3.jpg","t":"03 · Böhler Welding 용접재료 포트폴리오","s":"https://www.voestalpine.com/welding/global-en/"}]},"polysoude":{"name":"Polysoude","tagline":"정밀한 용접을, 일관된 품질로","intro":"Polysoude는 오비탈 TIG 용접과 자동화 용접 시스템을 전문으로 제공합니다. 튜브·배관 및 튜브시트 용접부터 두꺼운 부재의 협개선 용접과 클래딩까지, 용접 전원장치·헤드·제어 기술을 결합해 높은 품질과 반복 정밀도가 요구되는 접합 공정을 지원합니다.","tags":["오비탈 튜브·배관 용접 시스템","튜브–튜브시트 용접 시스템","자동화 용접·클래딩 솔루션"],"appl":"반도체·고순도 배관 · 발전·원자력 · 조선·플랜트 · 열교환기","site":"https://www.polysoude.com/","logo":"assets/logo-polysoude.png","figs":[{"f":"assets/sup/polysoude-1.jpg","t":"01 · 오비탈 용접 전원장치","s":"https://www.polysoude.com/orbital-and-automated-welding/orbital-tube-and-pipe-welding/"},{"f":"assets/sup/polysoude-2.jpg","t":"02 · 밀폐형 오비탈 용접 헤드","s":"https://www.polysoude.com/orbital-and-automated-welding/orbital-tube-and-pipe-welding/"},{"f":"assets/sup/polysoude-3.jpg","t":"03 · 협개선 자동 용접","s":"https://www.polysoude.com/orbital-and-automated-welding/automated-welding/"}]},"vac":{"name":"VAC · VACUUMSCHMELZE","tagline":"자성 소재의 정밀함으로, 산업의 성능을 높이다","intro":"VAC는 연자성 합금과 영구자석, 자기 코어 및 부품을 개발·생산하는 자성 소재 전문 기업입니다. 소재 설계부터 가공 부품까지 폭넓은 솔루션을 제공하며, 전력 변환과 전동화, 산업용 구동 시스템 등 다양한 분야의 효율과 성능 향상을 지원합니다.","tags":["연자성 합금 및 가공 부품","나노결정 소재·자기 코어","희토류 영구자석"],"appl":"전동화 · 전력전자 · 산업용 모터 · 에너지","site":"https://www.vacuumschmelze.com/","logo":"assets/logo-vac.png","figs":[{"f":"assets/sup/vac-1.jpg","t":"01 · 니켈-철 연자성 합금 판재","s":"https://www.vacuumschmelze.com/products/soft-magnetic-materials-and-stamped-parts"},{"f":"assets/sup/vac-2.jpg","t":"02 · VITROPERM 나노결정 자성 소재","s":"https://www.vacuumschmelze.com/products/soft-magnetic-materials-and-stamped-parts"},{"f":"assets/sup/vac-3.jpg","t":"03 · VACOMAX 영구자석","s":"https://www.vacuumschmelze.com/products/permanent-magnets"}]},"gbc":{"name":"G.B.C. Industrial Tools","tagline":"정밀한 절단과 면취, 완성도 높은 용접의 시작","intro":"G.B.C.는 파이프와 플레이트의 절단·면취 장비를 전문으로 공급합니다. 파이프 끝단 가공부터 냉간 절단, 판재의 용접 개선 가공까지 다양한 작업에 대응하며, 현장 조건과 가공 대상에 맞는 장비로 용접 전처리 공정의 생산성과 작업 품질을 높입니다.","tags":["파이프 절단·면취 장비","플레이트 면취 장비","플랜지 가공 장비"],"appl":"배관 제작 · 플랜트 · 조선 · 금속 구조물","site":"https://gbcspa.com/en/","logo":"assets/logo-gbc.png","figs":[{"f":"assets/sup/gbc-1.jpg","t":"01 · 파이프 면취 장비","s":"https://gbcspa.com/en/"},{"f":"assets/sup/gbc-2.jpg","t":"02 · 파이프 절단 장비","s":"https://gbcspa.com/en/"},{"f":"assets/sup/gbc-3.jpg","t":"03 · 플레이트 면취 장비","s":"https://gbcspa.com/en/"}]},"orbitalum":{"name":"Orbitalum · Cutting Machines","tagline":"정밀한 배관 제작, 정확한 절단에서 시작됩니다","intro":"Orbitalum은 튜브·파이프의 정밀 절단을 위한 장비를 제공합니다. GF·GFX 시리즈와 이동형 PS 4.5 Plus 시리즈를 통해 다양한 관경과 작업 환경에 대응하며, 직각도와 절단면 품질이 중요한 배관 제작 및 용접 전처리 공정의 완성도를 높입니다.","tags":["GF 시리즈","GFX 시리즈","PS 4.5 Plus 시리즈"],"appl":"반도체 · 제약·바이오 · 식음료 · 열교환기 · 에너지 설비","site":"https://www.orbitalum.com/","logo":"assets/logo-orbitalum.png","figs":[{"f":"assets/sup/orbitalum-1.jpg","t":"GF 시리즈","m":"GF 4 · GF 6 · GF 8 · GF 12","d":"다양한 관경의 파이프를 정밀하게 절단하는 장비입니다. 대상 파이프의 외경·두께와 작업 조건에 따라 모델을 선택할 수 있습니다.","s":"https://orbitalum.com/us/product/gf-saw/"},{"f":"assets/sup/orbitalum-2.jpg","t":"GFX 시리즈","m":"GFX 3.0 · GFX 6.6","d":"정밀 배관 제작을 위한 튜브·파이프 절단 장비입니다. 반도체, 제약·바이오, 식음료 등 절단 품질이 중요한 공정에 적용됩니다.","s":"https://orbitalum.com/us/product/gfx-saw/"},{"f":"assets/sup/orbitalum-3.jpg","t":"PS 4.5 Plus 시리즈","m":"PS 4.5 Plus · PS 4.5 Plus Battery","d":"현장 이동 작업에 적합한 튜브 절단 장비입니다. 전원식과 배터리식 모델을 제공해 작업 장소와 전원 환경에 맞춰 선택할 수 있습니다.","s":"https://orbitalum.com/us/product/ps-4-5-plus-battery/"}]},"transfluid":{"name":"transfluid","tagline":"튜브 가공의 각 공정을, 하나의 자동화로","intro":"transfluid는 튜브 벤딩, 엔드포밍 및 절단 장비와 자동화 시스템을 제공합니다. 개별 장비부터 공정 간 이송과 로봇을 연계한 생산 셀까지 고객의 가공 요구에 맞춰 구성하며, 복잡한 튜브 부품의 생산성과 반복 가공 품질을 높입니다.","tags":["CNC 튜브 벤딩 장비","튜브 엔드포밍·절단 장비","튜브 가공 자동화 셀"],"appl":"자동차 · 항공 · 열교환·공조 · 유압 배관 · 산업 설비","site":"https://www.transfluid.net/","logo":"assets/logo-transfluid.png","figs":[{"f":"assets/sup/transfluid-1.jpg","t":"01 · CNC 튜브 벤딩 장비","s":"https://www.transfluid.net/"},{"f":"assets/sup/transfluid-2.jpg","t":"02 · 튜브 엔드포밍 장비","s":"https://www.transfluid.net/"},{"f":"assets/sup/transfluid-3.jpg","t":"03 · 튜브 가공 자동화 셀","s":"https://www.transfluid.net/"}]},"bauer":{"name":"Bauer Gear Motor","tagline":"공정을 움직이는 힘, 효율을 높이는 구동 기술","intro":"Bauer Gear Motor는 모터와 감속기를 결합한 기어드 모터 및 산업용 구동 솔루션을 제공합니다. 다양한 기어 구성과 고효율 모터 기술을 바탕으로 일반 생산 설비부터 위생 관리가 중요한 식음료 공정, 수처리 환경까지 운전 조건에 맞는 구동 시스템을 제안합니다.","tags":["헬리컬·평행축·베벨 기어드 모터","위생형·스테인리스 구동 솔루션","수중용 기어드 모터"],"appl":"생산 자동화 · 이송 설비 · 식음료 · 수처리","site":"https://www.bauergears.com/en","logo":"assets/logo-bauer.png","figs":[{"f":"assets/sup/bauer-1.jpg","t":"01 · BG 시리즈 헬리컬 기어드 모터","s":"https://www.bauergears.com/en/products/geared-motors"},{"f":"assets/sup/bauer-2.jpg","t":"02 · 식음료용 위생형 구동 솔루션","s":"https://www.bauergears.com/en"},{"f":"assets/sup/bauer-3.jpg","t":"03 · 수처리용 수중 기어드 모터","s":"https://www.bauergears.com/en"}]},"tdrill":{"name":"T-DRILL","tagline":"","intro":"","tags":[],"appl":"튜브 분기 · 성형 · 절단","site":"https://www.t-drill.fi/","logo":"","figs":[]},"efco":{"name":"EFCO Maschinenbau","tagline":"밸브의 정밀함을 되살리는 정비 기술","intro":"EFCO는 산업용 밸브의 연삭·래핑 장비, 이동식 선삭 장비 및 밸브 시험 설비를 제공합니다. 밸브 시트와 플랜지의 정밀 가공부터 기밀·압력 시험까지 정비 과정에 필요한 솔루션을 갖추고, 현장과 정비 공장에서 설비의 기능 회복과 품질 확인을 지원합니다.","tags":["밸브 시트 연삭·래핑 장비","이동식 선삭·플랜지 가공 장비","밸브 시험 설비"],"appl":"발전 · 정유·석유화학 · 플랜트 · 밸브 제작·정비","site":"https://www.efco-dueren.de/en","logo":"assets/logo-efco.png","figs":[{"f":"assets/sup/efco-1.jpg","t":"01 · VALVA 밸브 시트 연삭 장비","s":"https://www.efco-dueren.de/en/grinding-machines/grinding-machine-for-flat-seats-valva"},{"f":"assets/sup/efco-2.jpg","t":"02 · TDF 이동식 플랜지 가공 장비","s":"https://www.efco-dueren.de/en/turning-machines/portable-lathes/portable-flange-turning-machine-tdf"},{"f":"assets/sup/efco-3.jpg","t":"03 · PS-H10 수평형 밸브 시험 장비","s":"https://www.efco-dueren.de/en/valve-test-benches/horizontal-test-benches/valve-test-bench-ps-h10"}]},"bedra":{"name":"bedra","tagline":"정밀한 와이어 기술로, 가공과 접합의 품질을 높이다","intro":"bedra는 정밀 와이어와 합금 기술을 바탕으로 방전가공, 용접 및 브레이징용 제품을 공급합니다. EDM 와이어부터 구리계·알루미늄 용접 와이어까지 공정과 소재에 적합한 제품군을 갖추고, 정밀 가공과 안정적인 금속 접합을 지원합니다.","tags":["EDM 방전가공 와이어","구리계 용접·브레이징 와이어","알루미늄 용접 와이어"],"appl":"금형·정밀 가공 · 자동차 · 금속 접합 · 산업 제조","site":"https://www.bedra.com/europe/","logo":"assets/logo-bedra.png","figs":[{"f":"assets/sup/bedra-1.jpg","t":"01 · EDM 방전가공 와이어","s":"https://www.bedra.com/europe/"},{"f":"assets/sup/bedra-2.jpg","t":"02 · 구리계 용접·브레이징 와이어","s":"https://www.bedra.com/europe/"},{"f":"assets/sup/bedra-3.jpg","t":"03 · 알루미늄 용접 와이어","s":"https://www.bedra.com/europe/"}]},"safra":{"name":"SAFRA","tagline":"알루미늄과 구리의 접합을 완성하는 용접재료","intro":"SAFRA는 알루미늄 및 구리 합금 기반의 용접재료를 전문으로 생산합니다. MIG 와이어와 TIG 용접봉을 중심으로 다양한 접합 조건에 대응하며, 조선·자동차·철도 및 저온 설비 등 소재 특성과 용접 품질이 중요한 제조 분야에 솔루션을 제공합니다.","tags":["알루미늄 합금 MIG 와이어","알루미늄·구리 합금 TIG 용접봉","구리 합금 용접·브레이징 와이어"],"appl":"조선 · 자동차 · 철도 차량 · 저온 설비","site":"https://www.safraspa.it/en/","logo":"assets/logo-safra.png","figs":[{"f":"assets/sup/safra-1.jpg","t":"01 · 알루미늄 용접재료","s":"https://www.safraspa.it/en/"},{"f":"assets/sup/safra-2.jpg","t":"02 · 구리계 용접·브레이징 재료","s":"https://www.safraspa.it/en/"},{"f":"assets/sup/safra-3.jpg","t":"03 · 용접 작업 적용 이미지","s":"https://www.safraspa.it/en/"}]},"lsn":{"name":"LSN Diffusion","tagline":"표면에서 입체까지, 금속 분말의 가능성을 넓히다","intro":"LSN Diffusion은 니켈·코발트·철 기반 합금 분말을 제조하는 금속 분말 전문 기업입니다. 표면 강화와 고온 브레이징부터 적층제조, 열간 등방압 성형까지 다양한 공정에 대응하며, 용도에 적합한 합금 조성과 분말 특성으로 부품의 내구성과 제조 품질을 지원합니다.","tags":["표면 강화용 합금 분말","고온 브레이징용 분말","적층제조·HIP용 분말"],"appl":"표면 코팅 · 내마모·내식 보수 · 고온 접합 · 금속 적층제조","site":"https://lsndiffusion.com/","logo":"assets/logo-lsn.png","figs":[{"f":"assets/sup/lsn-1.jpg","t":"01 · 금속 분말 및 적용 분야","s":"https://lsndiffusion.com/"},{"f":"assets/sup/lsn-2.jpg","t":"02 · 고온 브레이징 적용 분야","s":"https://lsndiffusion.com/products/"},{"f":"assets/sup/lsn-3.jpg","t":"03 · 적층제조 적용 분야","s":"https://lsndiffusion.com/products/"}]}};
+  var SUP = {"utp":{"name":"voestalpine Böhler Welding","tagline":"접합부터 보수까지, 용도에 맞는 용접 솔루션","intro":"voestalpine Böhler Welding은 접합 용접, 보수·표면 보호 및 브레이징을 위한 폭넓은 용접재료를 제공합니다. Böhler Welding, UTP, Fontargen Brazing 브랜드의 전문성을 바탕으로 소재와 사용 환경에 적합한 솔루션을 제안하며, 제조 품질과 설비 수명 향상을 지원합니다.","tags":["Böhler Welding 접합 용접재료","UTP 보수·표면 보호용 용접재료","Fontargen Brazing 브레이징 재료"],"appl":"발전 · 조선 · 석유화학 · 시멘트·광업 · 일반 제조","site":"https://www.voestalpine.com/welding/global-en/","logo":"assets/logo-utp.png","figs":[{"f":"assets/sup/bohler-1.jpg","t":"01 · 용접재료 제품군","s":"https://www.voestalpine.com/welding/global-en/products/consumables/"},{"f":"assets/sup/bohler-2.jpg","t":"02 · 브레이징 재료 제품군","s":"https://www.voestalpine.com/welding/global-en/products/consumables/"},{"f":"assets/sup/bohler-3.jpg","t":"03 · Böhler Welding 용접재료 포트폴리오","s":"https://www.voestalpine.com/welding/global-en/"}]},"polysoude":{"name":"Polysoude","tagline":"정밀한 용접을, 일관된 품질로","intro":"Polysoude는 오비탈 TIG 용접과 자동화 용접 시스템을 전문으로 제공합니다. 튜브·배관 및 튜브시트 용접부터 두꺼운 부재의 협개선 용접과 클래딩까지, 용접 전원장치·헤드·제어 기술을 결합해 높은 품질과 반복 정밀도가 요구되는 접합 공정을 지원합니다.","tags":["오비탈 튜브·배관 용접 시스템","튜브–튜브시트 용접 시스템","자동화 용접·클래딩 솔루션"],"appl":"반도체·고순도 배관 · 발전·원자력 · 조선·플랜트 · 열교환기","site":"https://www.polysoude.com/","logo":"assets/logo-polysoude.png","figs":[{"f":"assets/sup/polysoude-1.jpg","t":"01 · 오비탈 용접 전원장치","s":"https://www.polysoude.com/orbital-and-automated-welding/orbital-tube-and-pipe-welding/"},{"f":"assets/sup/polysoude-2.jpg","t":"02 · 밀폐형 오비탈 용접 헤드","s":"https://www.polysoude.com/orbital-and-automated-welding/orbital-tube-and-pipe-welding/"},{"f":"assets/sup/polysoude-3.jpg","t":"03 · 협개선 자동 용접","s":"https://www.polysoude.com/orbital-and-automated-welding/automated-welding/"}]},"vac":{"name":"VAC · VACUUMSCHMELZE","tagline":"자성 소재의 정밀함으로, 산업의 성능을 높이다","intro":"VAC는 연자성 합금과 영구자석, 자기 코어 및 부품을 개발·생산하는 자성 소재 전문 기업입니다. 소재 설계부터 가공 부품까지 폭넓은 솔루션을 제공하며, 전력 변환과 전동화, 산업용 구동 시스템 등 다양한 분야의 효율과 성능 향상을 지원합니다.","tags":["연자성 합금 및 가공 부품","나노결정 소재·자기 코어","희토류 영구자석"],"appl":"전동화 · 전력전자 · 산업용 모터 · 에너지","site":"https://www.vacuumschmelze.com/","logo":"assets/logo-vac.png","figs":[{"f":"assets/sup/vac-1.jpg","t":"01 · 니켈-철 연자성 합금 판재","s":"https://www.vacuumschmelze.com/products/soft-magnetic-materials-and-stamped-parts"},{"f":"assets/sup/vac-2.jpg","t":"02 · VITROPERM 나노결정 자성 소재","s":"https://www.vacuumschmelze.com/products/soft-magnetic-materials-and-stamped-parts"},{"f":"assets/sup/vac-3.jpg","t":"03 · VACOMAX 영구자석","s":"https://www.vacuumschmelze.com/products/permanent-magnets"}]},"gbc":{"name":"G.B.C. Industrial Tools","tagline":"정밀한 절단과 면취, 완성도 높은 용접의 시작","intro":"G.B.C.는 파이프와 플레이트의 절단·면취 장비를 전문으로 공급합니다. 파이프 끝단 가공부터 냉간 절단, 판재의 용접 개선 가공까지 다양한 작업에 대응하며, 현장 조건과 가공 대상에 맞는 장비로 용접 전처리 공정의 생산성과 작업 품질을 높입니다.","tags":["파이프 절단·면취 장비","플레이트 면취 장비","플랜지 가공 장비"],"appl":"배관 제작 · 플랜트 · 조선 · 금속 구조물","site":"https://gbcspa.com/en/","logo":"assets/logo-gbc.png","figs":[{"f":"assets/sup/gbc-1.jpg","t":"01 · 파이프 면취 장비","s":"https://gbcspa.com/en/"},{"f":"assets/sup/gbc-2.jpg","t":"02 · 파이프 절단 장비","s":"https://gbcspa.com/en/"},{"f":"assets/sup/gbc-3.jpg","t":"03 · 플레이트 면취 장비","s":"https://gbcspa.com/en/"}]},"orbitalum":{"name":"Orbitalum · Cutting & Facing Machines","tagline":"정확한 절단부터 정밀한 단면 가공까지","intro":"Orbitalum은 튜브·파이프의 절단과 용접 전 단면 가공을 위한 장비를 제공합니다. GF·GFX·PS 시리즈로 파이프를 절단하고, RPG 시리즈로 끝면을 평탄하고 직각으로 다듬어 배관 제작과 용접 준비 공정의 완성도를 높입니다.","tags":["GF 시리즈","GFX 시리즈","PS 4.5 Plus 시리즈","RPG 단면 가공 시리즈"],"appl":"반도체 · 제약·바이오 · 식음료 · 열교환기 · 에너지 설비","site":"https://orbitalum.com/us/category-products/cutting/","logo":"assets/logo-orbitalum.png","figs":[{"f":"assets/sup/orbitalum-1.jpg","t":"GF 시리즈","m":"GF 4 · GF 6 · GF 8 · GF 12","d":"다양한 관경의 파이프를 정밀하게 절단하는 장비입니다. 대상 파이프의 외경·두께와 작업 조건에 따라 모델을 선택할 수 있습니다.","s":"https://orbitalum.com/us/product/gf-saw/"},{"f":"assets/sup/orbitalum-2.jpg","t":"GFX 시리즈","m":"GFX 3.0 · GFX 6.6","d":"정밀 배관 제작을 위한 튜브·파이프 절단 장비입니다. 반도체, 제약·바이오, 식음료 등 절단 품질이 중요한 공정에 적용됩니다.","s":"https://orbitalum.com/us/product/gfx-saw/"},{"f":"assets/sup/orbitalum-3.jpg","t":"PS 4.5 Plus 시리즈","m":"PS 4.5 Plus · PS 4.5 Plus Battery","d":"현장 이동 작업에 적합한 튜브 절단 장비입니다. 전원식과 배터리식 모델을 제공해 작업 장소와 전원 환경에 맞춰 선택할 수 있습니다.","s":"https://orbitalum.com/us/product/ps-4-5-plus-battery/"},{"f":"assets/sup/orbitalum-4.jpg","t":"RPG 단면 가공 시리즈","m":"RPG ONE · 1.5 · 3.0 · 4.5 · 8.6","d":"절단된 튜브 끝면을 평탄하고 직각으로 다듬는 장비입니다. 열을 가하지 않는 기계식 가공과 중심 정렬 클램핑으로 오비탈 용접에 필요한 접합면을 준비합니다. 적용 외경은 3.0mm부터 219.1mm까지입니다.","s":"https://orbitalum.com/us/product/rpg/"},{"f":"assets/sup/orbitalum-5.jpg","t":"RPG 가공부 상세","m":"","d":"클램핑 셸을 교환해 다양한 관경에 대응하며 스테인리스강, 알루미늄, 티타늄 등을 가공합니다. 작업 장소와 전원 환경에 따라 전원식 또는 배터리식 모델을 선택할 수 있습니다.","s":"https://orbitalum.com/us/product/rpg/"}]},"transfluid":{"name":"transfluid","tagline":"튜브 가공의 각 공정을, 하나의 자동화로","intro":"transfluid는 튜브 벤딩, 엔드포밍 및 절단 장비와 자동화 시스템을 제공합니다. 개별 장비부터 공정 간 이송과 로봇을 연계한 생산 셀까지 고객의 가공 요구에 맞춰 구성하며, 복잡한 튜브 부품의 생산성과 반복 가공 품질을 높입니다.","tags":["CNC 튜브 벤딩 장비","튜브 엔드포밍·절단 장비","튜브 가공 자동화 셀"],"appl":"자동차 · 항공 · 열교환·공조 · 유압 배관 · 산업 설비","site":"https://www.transfluid.net/","logo":"assets/logo-transfluid.png","figs":[{"f":"assets/sup/transfluid-1.jpg","t":"01 · CNC 튜브 벤딩 장비","s":"https://www.transfluid.net/"},{"f":"assets/sup/transfluid-2.jpg","t":"02 · 튜브 엔드포밍 장비","s":"https://www.transfluid.net/"},{"f":"assets/sup/transfluid-3.jpg","t":"03 · 튜브 가공 자동화 셀","s":"https://www.transfluid.net/"}]},"bauer":{"name":"Bauer Gear Motor","tagline":"공정을 움직이는 힘, 효율을 높이는 구동 기술","intro":"Bauer Gear Motor는 모터와 감속기를 결합한 기어드 모터 및 산업용 구동 솔루션을 제공합니다. 다양한 기어 구성과 고효율 모터 기술을 바탕으로 일반 생산 설비부터 위생 관리가 중요한 식음료 공정, 수처리 환경까지 운전 조건에 맞는 구동 시스템을 제안합니다.","tags":["헬리컬·평행축·베벨 기어드 모터","위생형·스테인리스 구동 솔루션","수중용 기어드 모터"],"appl":"생산 자동화 · 이송 설비 · 식음료 · 수처리","site":"https://www.bauergears.com/en","logo":"assets/logo-bauer.png","figs":[{"f":"assets/sup/bauer-1.jpg","t":"01 · BG 시리즈 헬리컬 기어드 모터","s":"https://www.bauergears.com/en/products/geared-motors"},{"f":"assets/sup/bauer-2.jpg","t":"02 · 식음료용 위생형 구동 솔루션","s":"https://www.bauergears.com/en"},{"f":"assets/sup/bauer-3.jpg","t":"03 · 수처리용 수중 기어드 모터","s":"https://www.bauergears.com/en"}]},"tdrill":{"name":"T-DRILL","tagline":"분기관 성형과 내부 용접을 위한 기술","intro":"T-DRILL의 콜라링 기술은 주관의 소재를 성형해 분기관 연결부를 만듭니다. 여기에 관 내부에서 작업하는 자동 용접 기술을 더해, 배관과 매니폴드 제작에 필요한 공정 솔루션을 제공합니다.","tags":["T-INWELD 튜브 내부 용접","T-115 이동형 콜라링","S-56 MultiFlex 자동 콜라링","TEC-220 산업용 콜라링"],"appl":"공정 배관 · 매니폴드 · 열교환기·공조 · 조선","site":"https://t-drill.com/","logo":"assets/logo-tdrill.png","figs":[{"f":"assets/sup/tdrill-1.jpg","t":"T-INWELD","m":"튜브 내부 자동 용접 장비","d":"관 내부에서 용접을 수행하는 자동화 장비입니다. T형 연결부와 매니폴드 등 관형 부품의 접합에 적용되며, 내부 표면과 유동 특성이 중요한 배관 제작에 적합합니다.","s":"https://t-drill.com/products/t-inweld-welding-machine/"},{"f":"assets/sup/tdrill-2.jpg","t":"T-115","m":"이동형 콜라링 장비","d":"공장과 현장 작업을 함께 고려한 이동형 설계입니다. 한 작업대에서 파일럿 홀 가공, 분기관 성형, 끝면 정리를 진행하며 관경에 맞춰 공구를 조정합니다.","s":"https://t-drill.com/products/t-115-transportable-collaring-machine/"},{"f":"assets/sup/tdrill-3.jpg","t":"S-56 MultiFlex","m":"자동 콜라링 장비","d":"공구 유닛을 최대 세 개까지 구성할 수 있습니다. 접합 방식에 따라 유닛을 조합해 다양한 분기관이 필요한 매니폴드 생산에 대응합니다.","s":"https://t-drill.com/products/s-56-multiflex/"},{"f":"assets/sup/tdrill-4.jpg","t":"TEC-220","m":"산업용 콜라링 장비","d":"주관에 분기관을 직접 성형하고 끝면을 정리하는 산업용 장비입니다. 소재와 생산 조건에 따라 위치 결정 장치, 측정 테이블 등 옵션을 검토할 수 있습니다.","s":"https://t-drill.com/products/tec-220-collaring-machine/"},{"f":"assets/sup/tdrill-5.jpg","t":"콜라링 적용 예시","m":"","d":"콜라링으로 형성한 스테인리스 매니폴드 연결부입니다. 별도의 티 피팅을 쓰는 방식보다 접합부 수를 줄일 수 있습니다.","s":"https://t-drill.com/technologies/collaring/"},{"f":"assets/sup/tdrill-6.jpg","t":"T-INWELD 적용 예시","m":"","d":"관 내부에서 용접한 접합부의 모습입니다.","s":"https://t-drill.com/products/t-inweld-welding-machine/"}]},"efco":{"name":"EFCO Maschinenbau","tagline":"밸브의 정밀함을 되살리는 정비 기술","intro":"EFCO는 산업용 밸브의 연삭·래핑 장비, 이동식 선삭 장비 및 밸브 시험 설비를 제공합니다. 밸브 시트와 플랜지의 정밀 가공부터 기밀·압력 시험까지 정비 과정에 필요한 솔루션을 갖추고, 현장과 정비 공장에서 설비의 기능 회복과 품질 확인을 지원합니다.","tags":["밸브 시트 연삭·래핑 장비","이동식 선삭·플랜지 가공 장비","밸브 시험 설비"],"appl":"발전 · 정유·석유화학 · 플랜트 · 밸브 제작·정비","site":"https://www.efco-dueren.de/en","logo":"assets/logo-efco.png","figs":[{"f":"assets/sup/efco-1.jpg","t":"01 · VALVA 밸브 시트 연삭 장비","s":"https://www.efco-dueren.de/en/grinding-machines/grinding-machine-for-flat-seats-valva"},{"f":"assets/sup/efco-2.jpg","t":"02 · TDF 이동식 플랜지 가공 장비","s":"https://www.efco-dueren.de/en/turning-machines/portable-lathes/portable-flange-turning-machine-tdf"},{"f":"assets/sup/efco-3.jpg","t":"03 · PS-H10 수평형 밸브 시험 장비","s":"https://www.efco-dueren.de/en/valve-test-benches/horizontal-test-benches/valve-test-bench-ps-h10"}]},"bedra":{"name":"bedra","tagline":"정밀한 와이어 기술로, 가공과 접합의 품질을 높이다","intro":"bedra는 정밀 와이어와 합금 기술을 바탕으로 방전가공, 용접 및 브레이징용 제품을 공급합니다. EDM 와이어부터 구리계·알루미늄 용접 와이어까지 공정과 소재에 적합한 제품군을 갖추고, 정밀 가공과 안정적인 금속 접합을 지원합니다.","tags":["EDM 방전가공 와이어","구리계 용접·브레이징 와이어","알루미늄 용접 와이어"],"appl":"금형·정밀 가공 · 자동차 · 금속 접합 · 산업 제조","site":"https://www.bedra.com/europe/","logo":"assets/logo-bedra.png","figs":[{"f":"assets/sup/bedra-1.jpg","t":"01 · EDM 방전가공 와이어","s":"https://www.bedra.com/europe/"},{"f":"assets/sup/bedra-2.jpg","t":"02 · 구리계 용접·브레이징 와이어","s":"https://www.bedra.com/europe/"},{"f":"assets/sup/bedra-3.jpg","t":"03 · 알루미늄 용접 와이어","s":"https://www.bedra.com/europe/"}]},"safra":{"name":"SAFRA","tagline":"알루미늄과 구리의 접합을 완성하는 용접재료","intro":"SAFRA는 알루미늄 및 구리 합금 기반의 용접재료를 전문으로 생산합니다. MIG 와이어와 TIG 용접봉을 중심으로 다양한 접합 조건에 대응하며, 조선·자동차·철도 및 저온 설비 등 소재 특성과 용접 품질이 중요한 제조 분야에 솔루션을 제공합니다.","tags":["알루미늄 합금 MIG 와이어","알루미늄·구리 합금 TIG 용접봉","구리 합금 용접·브레이징 와이어"],"appl":"조선 · 자동차 · 철도 차량 · 저온 설비","site":"https://www.safraspa.it/en/","logo":"assets/logo-safra.png","figs":[{"f":"assets/sup/safra-1.jpg","t":"01 · 알루미늄 용접재료","s":"https://www.safraspa.it/en/"},{"f":"assets/sup/safra-2.jpg","t":"02 · 구리계 용접·브레이징 재료","s":"https://www.safraspa.it/en/"},{"f":"assets/sup/safra-3.jpg","t":"03 · 용접 작업 적용 이미지","s":"https://www.safraspa.it/en/"}]},"lsn":{"name":"LSN Diffusion","tagline":"표면에서 입체까지, 금속 분말의 가능성을 넓히다","intro":"LSN Diffusion은 니켈·코발트·철 기반 합금 분말을 제조하는 금속 분말 전문 기업입니다. 표면 강화와 고온 브레이징부터 적층제조, 열간 등방압 성형까지 다양한 공정에 대응하며, 용도에 적합한 합금 조성과 분말 특성으로 부품의 내구성과 제조 품질을 지원합니다.","tags":["표면 강화용 합금 분말","고온 브레이징용 분말","적층제조·HIP용 분말"],"appl":"표면 코팅 · 내마모·내식 보수 · 고온 접합 · 금속 적층제조","site":"https://lsndiffusion.com/","logo":"assets/logo-lsn.png","figs":[{"f":"assets/sup/lsn-1.jpg","t":"01 · 금속 분말 및 적용 분야","s":"https://lsndiffusion.com/"},{"f":"assets/sup/lsn-2.jpg","t":"02 · 고온 브레이징 적용 분야","s":"https://lsndiffusion.com/products/"},{"f":"assets/sup/lsn-3.jpg","t":"03 · 적층제조 적용 분야","s":"https://lsndiffusion.com/products/"}]}};
+  var NOTICE = (function(){
+    var cache = null;
+    function esc2(x){ return String(x==null?'':x).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+    function safeUrl(u){
+      u = String(u||'').trim();
+      if(/^https?:\/\//i.test(u)) return u;
+      if(/^[A-Za-z0-9._\-\/]+$/.test(u) && u.indexOf('..') === -1) return u;
+      return '';
+    }
+    function get(u){
+      return fetch(u, {cache:'no-cache'}).then(function(r){
+        if(!r.ok) throw new Error(String(r.status));
+        return r.text();
+      });
+    }
+    function parseList(txt){
+      return txt.replace(/\r/g,'').split('\n').map(function(l){
+        l = l.trim();
+        if(!l || l.charAt(0) === '#') return null;
+        var p = l.split('|');
+        if(p.length < 3) return null;
+        var id = p[1].trim();
+        if(!/^[A-Za-z0-9._-]+$/.test(id)) return null;
+        var t = p.slice(2).join('|').trim();
+        if(!t) return null;
+        return { date: p[0].trim(), id: id, title: t };
+      }).filter(function(x){ return x; });
+    }
+    function load(){
+      if(cache) return Promise.resolve(cache);
+      return get('notices/list.txt').then(function(t){ cache = parseList(t); return cache; });
+    }
+    function body(txt){
+      var out = [], para = [], list = [];
+      function fp(){ if(para.length){ out.push('<p>'+esc2(para.join(' '))+'</p>'); para = []; } }
+      function fl(){ if(list.length){ out.push('<ul>'+list.map(function(x){ return '<li>'+esc2(x)+'</li>'; }).join('')+'</ul>'); list = []; } }
+      txt.replace(/\r/g,'').split('\n').forEach(function(raw){
+        var l = raw.trim();
+        if(l === ''){ fp(); fl(); return; }
+        if(l.slice(0,2) === '##'){ fp(); fl(); out.push('<h3>'+esc2(l.replace(/^#+\s*/,''))+'</h3>'); return; }
+        if(l.charAt(0) === '#'){ return; }
+        if(l.charAt(0) === '-'){ fp(); list.push(l.replace(/^-\s*/,'')); return; }
+        var m = l.match(/^\[사진\]\s*(.+)$/);
+        if(m){
+          fp(); fl();
+          var a = m[1].split('|'), src = safeUrl(a[0]), cap = (a[1]||'').trim();
+          if(src){ out.push('<figure class="nFig"><img src="'+esc2(src)+'" alt="'+esc2(cap)+'" loading="lazy">'+(cap?'<figcaption>'+esc2(cap)+'</figcaption>':'')+'</figure>'); }
+          return;
+        }
+        m = l.match(/^\[링크\]\s*(.+)$/);
+        if(m){
+          fp(); fl();
+          var b = m[1].split('|'), href = safeUrl(b[0]), label = (b[1]||'').trim() || href;
+          if(href){ out.push('<p><a href="'+esc2(href)+'" target="_blank" rel="noopener noreferrer">'+esc2(label)+' &#8599;</a></p>'); }
+          return;
+        }
+        para.push(l);
+      });
+      fp(); fl();
+      return out.join('');
+    }
+    function head(title, sub){
+      return '<section class="pgHead"><div class="wrap">'
+        + '<a class="backLink" href="#top">&larr; 홈</a>'
+        + '<p class="kt">NOTICE</p><h1>'+esc2(title)+'</h1>'
+        + (sub ? '<p>'+esc2(sub)+'</p>' : '')
+        + '</div></section>';
+    }
+    function listPage(el){
+      el.innerHTML = head('공지사항','케미코의 소식과 안내를 전해 드립니다.')
+        + '<div class="wrap nWrap"><p class="nEmpty">불러오는 중입니다.</p></div>';
+      load().then(function(items){
+        var h = head('공지사항','케미코의 소식과 안내를 전해 드립니다.') + '<div class="wrap nWrap">';
+        if(!items.length){
+          h += '<p class="nEmpty">등록된 공지가 없습니다.</p>';
+        } else {
+          h += '<ul class="nList">' + items.map(function(it){
+            return '<li><a href="#n/'+esc2(it.id)+'"><span class="d">'+esc2(it.date)+'</span><span class="t">'+esc2(it.title)+'</span></a></li>';
+          }).join('') + '</ul>';
+        }
+        el.innerHTML = h + '</div>';
+      }).catch(function(){
+        el.innerHTML = head('공지사항','') + '<div class="wrap nWrap"><p class="nEmpty">공지 목록을 불러오지 못했습니다.</p></div>';
+      });
+    }
+    function onePage(id, el){
+      el.innerHTML = head('공지사항','') + '<div class="wrap nWrap"><p class="nEmpty">불러오는 중입니다.</p></div>';
+      Promise.all([load(), get('notices/'+id+'.txt')]).then(function(r){
+        var meta = null;
+        r[0].forEach(function(x){ if(x.id === id) meta = x; });
+        var title = meta ? meta.title : '공지사항';
+        var date = meta ? meta.date : '';
+        el.innerHTML = '<div class="wrap pgBody" style="padding-top:34px"><div class="nView">'
+          + '<a class="backLink" href="#p/news">&larr; 공지사항 목록</a>'
+          + '<div class="nTop"><p class="nDate">'+esc2(date)+'</p><h1>'+esc2(title)+'</h1></div>'
+          + '<div class="nBody">'+body(r[1])+'</div>'
+          + '<div class="nFoot"><a class="btn ghost" href="#p/news">목록으로</a><a class="btn" href="#request">자료·견적 요청</a></div>'
+          + '</div></div>';
+      }).catch(function(){
+        el.innerHTML = head('공지사항','') + '<div class="wrap nWrap"><p class="nEmpty">해당 공지를 찾을 수 없습니다. <a href="#p/news">목록으로</a></p></div>';
+      });
+    }
+    function home(){
+      var ul = document.querySelector('section#news ul.news');
+      if(!ul) return;
+      load().then(function(items){
+        if(!items.length){ ul.innerHTML = '<li><span class="nEmpty" style="border:0;padding:16px 4px;display:block">등록된 공지가 없습니다.</span></li>'; return; }
+        ul.innerHTML = items.slice(0,4).map(function(it){
+          return '<li><a href="#n/'+esc2(it.id)+'"><span class="d">'+esc2(it.date)+'</span><span class="t">'+esc2(it.title)+'</span></a></li>';
+        }).join('');
+      }).catch(function(){
+        ul.innerHTML = '<li><span class="nEmpty" style="border:0;padding:16px 4px;display:block">공지를 불러오지 못했습니다.</span></li>';
+      });
+    }
+    return { listPage: listPage, onePage: onePage, home: home };
+  })();
+
+  /* ── 보유재고 ─────────────────────────────────────────────
+     stock/list.csv 한 파일만 읽습니다. 엑셀에서 그 파일을 고쳐
+     올리면 이 표가 그대로 바뀝니다. 작성법은 stock/작성방법.txt */
+  var STOCK = (function(){
+    var COLS = ['재고번호','제조사','품명','규격','재질','수량','단위','입고','비고'];
+    var rows = null, maker = '', query = '', host = null;
+
+    function e(x){ return String(x==null?'':x).replace(/[&<>"]/g,function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+    /* 쉼표가 든 칸은 "..." 로 감싸 쓸 수 있습니다. */
+    function splitRow(line){
+      var out = [], cur = '', q = false, i;
+      for(i = 0; i < line.length; i++){
+        var ch = line.charAt(i);
+        if(q){
+          if(ch === '"'){
+            if(line.charAt(i+1) === '"'){ cur += '"'; i++; } else { q = false; }
+          } else { cur += ch; }
+        } else if(ch === '"'){ q = true; }
+        else if(ch === ','){ out.push(cur); cur = ''; }
+        else { cur += ch; }
+      }
+      out.push(cur);
+      return out.map(function(s){ return s.trim(); });
+    }
+
+    function parse(txt){
+      var lines = txt.replace(/^﻿/,'').replace(/\r/g,'').split('\n');
+      var head = null, list = [];
+      lines.forEach(function(raw){
+        var l = raw.trim();
+        if(!l || l.charAt(0) === '#') return;        /* 주석 줄은 건너뜁니다 */
+        var c = splitRow(l);
+        if(!head){ head = c; return; }               /* 첫 줄은 칸 이름 */
+        if(!c.join('')) return;
+        var o = {};
+        COLS.forEach(function(name){
+          var k = head.indexOf(name);
+          o[name] = k >= 0 ? (c[k] || '') : '';
+        });
+        if(!o['품명'] && !o['제조사']) return;
+        list.push(o);
+      });
+      return list;
+    }
+
+    function load(){
+      if(rows) return Promise.resolve(rows);
+      return fetch('stock/list.csv', {cache:'no-cache'}).then(function(r){
+        if(!r.ok) throw new Error(String(r.status));
+        return r.text();
+      }).then(function(t){ rows = parse(t); return rows; });
+    }
+
+    function makers(){
+      var seen = [], i;
+      for(i = 0; i < rows.length; i++){
+        if(rows[i]['제조사'] && seen.indexOf(rows[i]['제조사']) === -1) seen.push(rows[i]['제조사']);
+      }
+      return seen;
+    }
+
+    function matched(){
+      var q = query.trim().toLowerCase();
+      return rows.filter(function(r){
+        if(maker && r['제조사'] !== maker) return false;
+        if(!q) return true;
+        return COLS.some(function(k){ return String(r[k]).toLowerCase().indexOf(q) !== -1; });
+      });
+    }
+
+    function qty(r){
+      if(!r['수량']) return '-';
+      return e(r['수량']) + (r['단위'] ? '<span>' + e(r['단위']) + '</span>' : '');
+    }
+
+    function rowsHtml(list){
+      if(!list.length){
+        return '<p class="stEmpty">찾으시는 조건에 맞는 재고가 없습니다. 필요한 품목을 알려주시면 확보 가능 여부를 확인해 드리겠습니다.</p>';
+      }
+      var t = '<div class="stWrap"><table class="stock"><thead><tr>'
+        + '<th>재고번호</th><th>제조사</th><th>품명</th><th>규격</th><th>재질</th>'
+        + '<th>수량</th><th>입고</th><th>비고</th><th></th></tr></thead><tbody>';
+      t += list.map(function(r, i){
+        return '<tr>'
+          + '<td class="c">' + e(r['재고번호'] || '-') + '</td>'
+          + '<td class="m">' + e(r['제조사'] || '-') + '</td>'
+          + '<td class="nm">' + e(r['품명'] || '-') + '</td>'
+          + '<td>' + e(r['규격'] || '-') + '</td>'
+          + '<td>' + e(r['재질'] || '-') + '</td>'
+          + '<td class="q">' + qty(r) + '</td>'
+          + '<td class="y">' + e(r['입고'] || '-') + '</td>'
+          + '<td>' + e(r['비고'] || '') + '</td>'
+          + '<td class="rq"><button type="button" class="stAsk" data-i="' + i + '">견적 요청</button></td>'
+          + '</tr>';
+      }).join('') + '</tbody></table>';
+
+      /* 좁은 화면에서는 표 대신 카드로 보여 줍니다. */
+      t += '<div class="stCard">' + list.map(function(r, i){
+        var d = '';
+        function add(k, v){ if(v) d += '<dt>' + e(k) + '</dt><dd>' + v + '</dd>'; }
+        add('규격', e(r['규격']));
+        add('재질', e(r['재질']));
+        add('수량', r['수량'] ? qty(r) : '');
+        add('입고', e(r['입고']));
+        add('비고', e(r['비고']));
+        return '<article>'
+          + '<div class="hd"><span class="mk">' + e(r['제조사'] || '-') + '</span>'
+          + '<span class="cd">' + e(r['재고번호'] || '') + '</span></div>'
+          + '<h3>' + e(r['품명'] || '-') + '</h3>'
+          + (d ? '<dl>' + d + '</dl>' : '')
+          + '<button type="button" class="stAsk" data-i="' + i + '">견적 요청</button>'
+          + '</article>';
+      }).join('') + '</div></div>';
+      return t;
+    }
+
+    function paint(){
+      var list = matched();
+      var body = host.querySelector('#stBody');
+      var cnt = host.querySelector('#stCount');
+      if(cnt){
+        cnt.innerHTML = '전체 <b>' + rows.length + '</b>건 중 <b>' + list.length + '</b>건';
+      }
+      if(body) body.innerHTML = rowsHtml(list);
+      host.__list = list;
+      var btns = host.querySelectorAll('.stMaker button');
+      Array.prototype.forEach.call(btns, function(b){
+        b.setAttribute('aria-pressed', (b.getAttribute('data-m') || '') === maker ? 'true' : 'false');
+      });
+    }
+
+    /* 견적 요청 버튼 — 요청 양식으로 옮기면서 품목을 채워 넣습니다. */
+    function ask(r){
+      var sup = document.getElementById('f5');
+      var kind = document.getElementById('f6');
+      var msg = document.getElementById('f7');
+      if(sup){
+        sup.value = '';
+        Array.prototype.forEach.call(sup.options, function(o){
+          if(o.value === r['제조사'] || o.text === r['제조사']) sup.value = o.value || o.text;
+        });
+      }
+      if(kind){
+        Array.prototype.forEach.call(kind.options, function(o){
+          if(o.text === '가격·견적') kind.value = o.value || o.text;
+        });
+      }
+      var kindSel = document.getElementById('f0');
+      if(kindSel){
+        Array.prototype.forEach.call(kindSel.options, function(o){
+          if(o.text === '견적 요청') kindSel.value = o.value || o.text;
+        });
+      }
+      if(msg){
+        var t = '[보유재고 문의]\n';
+        ['재고번호','제조사','품명','규격','재질'].forEach(function(k){
+          if(r[k]) t += k + ' : ' + r[k] + '\n';
+        });
+        if(r['수량']) t += '재고수량 : ' + r['수량'] + (r['단위'] || '') + '\n';
+        t += '\n필요 수량과 납기를 적어 주십시오.\n';
+        msg.value = t;
+        try{ msg.scrollTop = 0; }catch(err){}
+      }
+      location.hash = '#request';
+      setTimeout(function(){
+        var sec = document.getElementById('request');
+        if(sec) sec.scrollIntoView({block:'start'});
+        var first = document.getElementById('f1');   /* 회사명부터 적으시도록 */
+        if(first){ try{ first.focus({preventScroll:true}); }catch(err){ try{ first.focus(); }catch(e2){} } }
+        if(msg){ try{ msg.scrollTop = 0; }catch(err){} }
+      }, 60);
+    }
+
+    function head(sub){
+      return '<section class="pgHead"><div class="wrap">'
+        + '<a class="backLink" href="#top">&larr; 홈</a>'
+        + '<p class="kt">STOCK LIST</p><h1>보유재고</h1>'
+        + (sub ? '<p>' + e(sub) + '</p>' : '')
+        + '</div></section>';
+    }
+
+    var SUB = '케미코가 보유 중인 재고입니다. 필요한 품목의 견적 요청을 눌러 주시면 담당자가 가격과 납기를 안내해 드립니다.';
+
+    function page(el){
+      host = el;
+      el.innerHTML = head(SUB) + '<div class="wrap pgBody"><p class="stEmpty">불러오는 중입니다.</p></div>';
+      load().then(function(){
+        var ms = makers();
+        var h = head(SUB) + '<div class="wrap pgBody">'
+          + '<div class="stTools">'
+          + '<div class="stSearch"><label class="vh" for="stQ">재고 검색</label>'
+          + '<input id="stQ" type="search" placeholder="품명, 규격, 재질로 찾기" autocomplete="off"></div>'
+          + '<div class="stMaker"><button type="button" data-m="" aria-pressed="true">전체</button>'
+          + ms.map(function(m){ return '<button type="button" data-m="' + e(m) + '" aria-pressed="false">' + e(m) + '</button>'; }).join('')
+          + '</div></div>'
+          + '<p class="stCount" id="stCount"></p>'
+          + '<div id="stBody"></div>'
+          + '</div>';
+        el.innerHTML = h;
+        paint();
+
+        var q = el.querySelector('#stQ');
+        if(q){
+          q.addEventListener('input', function(){ query = q.value; paint(); });
+          q.addEventListener('keydown', function(ev){ if(ev.key === 'Enter') ev.preventDefault(); });
+        }
+        el.addEventListener('click', function(ev){
+          var b = ev.target.closest ? ev.target.closest('button') : null;
+          if(!b) return;
+          if(b.hasAttribute('data-m')){ maker = b.getAttribute('data-m') || ''; paint(); return; }
+          if(b.classList.contains('stAsk')){
+            var i = parseInt(b.getAttribute('data-i'), 10);
+            var r = (host.__list || [])[i];
+            if(r) ask(r);
+          }
+        });
+      }).catch(function(){
+        el.innerHTML = head('') + '<div class="wrap pgBody"><p class="stEmpty">재고 목록을 불러오지 못했습니다. '
+          + '전화 02-567-5336~9 또는 chemiko@chemiko.net 으로 문의해 주십시오.</p></div>';
+      });
+    }
+
+    return { page: page };
+  })();
+
   var page=document.getElementById('supplierPage'), main=document.getElementById('mainView'),
       ceo=document.getElementById('ceoPage');
-  var STATIC = { ceo:ceo, overview:document.getElementById('overviewPage'), directions:document.getElementById('directionsPage') };
+  var STATIC = { ceo:ceo, overview:document.getElementById('overviewPage'), directions:document.getElementById('directionsPage'), privacy:document.getElementById('privacyPage') };
   function hideStatic(){ for(var k in STATIC){ if(STATIC[k]) STATIC[k].hidden = true; } }
   var CAT = {
     equipment:{ t:'Equipment', k:'장비',
@@ -816,6 +1453,21 @@
       h:'품질의 바탕이 되는 소재',
       d:'용접재료와 와이어부터 자성·브레이징 소재, 금속 분말까지. 용도와 작업 조건에 맞는 소재로 안정적인 품질을 뒷받침합니다.',
       list:['utp','vac','bedra','safra','lsn'] }
+  };
+  /* 카드에 쓰는 한 줄 설명 */
+  var CARD = {
+    polysoude:'튜브·배관용 오비탈 TIG 용접 및 자동 용접 시스템',
+    orbitalum:'용접 전 튜브·배관의 정밀 절단 및 단면 가공 장비',
+    gbc:'배관 절단·개선 가공 및 강판 면취 장비',
+    transfluid:'튜브 절단·벤딩·단부 성형 장비 및 통합 자동화 시스템',
+    bauer:'컨베이어와 생산 설비를 구동하는 산업용 기어드 모터',
+    tdrill:'배관 분기부 성형(콜라링) 및 내부 자동 용접 장비',
+    efco:'산업용 밸브의 시트면 연삭·래핑 및 성능 시험 장비',
+    utp:'접합·보수 용접 및 내마모 육성용 용접재료',
+    vac:'고성능 자성 소재 및 니켈계 브레이징 포일',
+    bedra:'정밀 방전가공용 전극선 및 용접·브레이징 와이어',
+    safra:'알루미늄 합금 및 구리 합금 용접 와이어',
+    lsn:'표면 코팅·브레이징·금속 적층제조용 합금 분말'
   };
   function renderCat(key){
     var c = CAT[key]; if(!c) return false;
@@ -829,10 +1481,10 @@
     h += '<div class="wrap"><div class="catGrid">';
     c.list.forEach(function(k){
       var d = SUP[k]; if(!d) return;
+      var line = CARD[k] || d.tagline || '';
       h += '<a class="catCard" href="#s/'+esc(k)+'">'
         +  '<span class="lw">'+(d.logo ? '<img src="'+esc(d.logo)+'" alt="'+esc(d.name)+'">' : '<span class="cn">'+esc(d.name)+'</span>')+'</span>'
-        +  '<span class="cn">'+esc(d.name)+'</span>'
-        +  (d.tagline ? '<span class="ct">'+esc(d.tagline)+'</span>' : '')
+        +  (line ? '<span class="ct">'+esc(line)+'</span>' : '')
         +  (d.appl ? '<span class="ca">'+esc(d.appl)+'</span>' : '')
         +  '<span class="cmore">자세히 보기 &rarr;</span></a>';
     });
@@ -863,7 +1515,6 @@
     } else {
       h+='<p class="caveat">※ 이 파트너사의 소개 문구와 이미지는 아직 준비되지 않았습니다.</p>';
     }
-    h+='<p class="caveat">※ 위 이미지는 제조사 공식 사이트에서 확보한 검토용 자료입니다. 게시 전에 제조사 승인 또는 대리점 계약의 이미지 사용 범위를 확인해야 합니다.</p>';
     h+='</div></section>';
     page.innerHTML=h; return true;
   }
@@ -871,7 +1522,17 @@
     var hash = location.hash || '';
     var ms = hash.match(/^#s\/([a-z0-9-]+)$/i);
     var mp = hash.match(/^#p\/([a-z0-9-]+)$/i);
+    var mn = hash.match(/^#n\/([A-Za-z0-9._-]+)$/);
     function showPage(){ main.hidden=true; window.scrollTo(0,0); }
+    if(mp && mp[1].toLowerCase() === 'news'){
+      hideStatic(); page.hidden=false; NOTICE.listPage(page); showPage(); return;
+    }
+    if(mp && mp[1].toLowerCase() === 'stock'){
+      hideStatic(); page.hidden=false; STOCK.page(page); showPage(); return;
+    }
+    if(mn){
+      hideStatic(); page.hidden=false; NOTICE.onePage(mn[1], page); showPage(); return;
+    }
     if(mp && STATIC[mp[1].toLowerCase()]){
       hideStatic(); STATIC[mp[1].toLowerCase()].hidden=false; page.hidden=true; page.innerHTML=''; showPage();
     } else if(mp && renderCat(mp[1].toLowerCase())){
@@ -949,6 +1610,63 @@
 
   window.addEventListener('hashchange', route);
   route();
+  NOTICE.home();
+})();
+</script>
+<script>
+(function(){
+  /* 자료·견적 요청 접수 주소 — Google Apps Script 배포 주소를 여기에 넣습니다 */
+  /* 요청 접수 주소 (Google Apps Script 웹 앱). 바꾸실 때는 이 한 줄만 고치십시오. */
+  var REQ_URL = 'https://script.google.com/macros/s/AKfycbyl05PxrydWH3w71vetmt9q0VWvKONydhKGnvPP0U7PZXUt-9ZqsXyua7ywx3zQ-Xo/exec';
+
+  var f    = document.getElementById('reqForm');
+  var sink = document.getElementById('reqSink');
+  var done = document.getElementById('reqDone');
+  var btn  = document.getElementById('reqBtn');
+  var err  = document.getElementById('reqErr');
+  var note = document.getElementById('reqNote');
+  if(!f || !sink || !done || !btn) return;
+
+  if(REQ_URL){
+    f.setAttribute('action', REQ_URL);
+  } else {
+    if(note) note.textContent = '※ 접수 연결 준비 중입니다. 당분간 chemiko@chemiko.net 으로 보내 주십시오.';
+  }
+
+  var sending = false, timer = null;
+
+  function fail(msg){
+    sending = false;
+    if(timer){ clearTimeout(timer); timer = null; }
+    btn.disabled = false;
+    btn.textContent = '자료·견적 요청하기';
+    if(err){ err.textContent = msg; err.hidden = false; }
+  }
+
+  f.addEventListener('submit', function(ev){
+    if(err) err.hidden = true;
+    if(!REQ_URL){
+      ev.preventDefault();
+      fail('아직 접수 연결이 준비되지 않았습니다. chemiko@chemiko.net 으로 보내 주십시오.');
+      return;
+    }
+    if(sending){ ev.preventDefault(); return; }
+    sending = true;
+    btn.disabled = true;
+    btn.textContent = '보내는 중입니다';
+    timer = setTimeout(function(){
+      fail('전송이 지연되고 있습니다. 잠시 후 다시 시도하시거나 chemiko@chemiko.net 으로 보내 주십시오.');
+    }, 20000);
+  });
+
+  sink.addEventListener('load', function(){
+    if(!sending) return;
+    sending = false;
+    if(timer){ clearTimeout(timer); timer = null; }
+    f.hidden = true;
+    done.hidden = false;
+    try{ done.scrollIntoView({block:'center'}); }catch(e){}
+  });
 })();
 </script>
 </body>
