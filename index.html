@@ -589,7 +589,8 @@
           <li><a href="#p/consumable">Consumable</a></li>
         </ul>
       </div>
-      <a href="#p/stock">보유재고</a>
+      <!-- 보유재고: 재고 목록이 준비되면 아래 한 줄의 주석(<!-- -->)만 벗기시면 메뉴가 다시 나옵니다. -->
+      <!-- <a href="#p/stock">보유재고</a> -->
       <a href="#p/news">공지사항</a>
     </nav>
     <div class="util">
@@ -1005,7 +1006,7 @@
       <a class="em" href="#p/privacy">개인정보처리방침</a>
       <a href="#p/overview">회사개요</a>
       <a href="#p/directions">오시는 길</a>
-      <a href="#p/stock">보유재고</a>
+      <!-- <a href="#p/stock">보유재고</a> -->
       <a href="#request">자료·견적 요청</a>
     </div>
     <p class="copy">Copyright (C) 2026 CHEMIKO CO., LTD. All rights reserved</p>
@@ -1402,6 +1403,14 @@
       host = el;
       el.innerHTML = head(SUB) + '<div class="wrap pgBody"><p class="stEmpty">불러오는 중입니다.</p></div>';
       load().then(function(){
+        /* 등록된 재고가 한 건도 없을 때는 검색창과 표를 띄우지 않습니다. */
+        if(!rows.length){
+          el.innerHTML = head('')
+            + '<div class="wrap pgBody"><p class="stEmpty">현재 공개된 보유재고 목록이 없습니다. '
+            + '필요한 품목을 알려주시면 재고와 납기를 확인해 회신드리겠습니다.</p>'
+            + '<p style="margin-top:22px"><a class="btn" href="#request">자료·견적 요청 &rarr;</a></p></div>';
+          return;
+        }
         var ms = makers();
         var h = head(SUB) + '<div class="wrap pgBody">'
           + '<div class="stTools">'
