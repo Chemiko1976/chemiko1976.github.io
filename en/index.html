@@ -72,6 +72,9 @@
   .bar .logo{display:flex;align-items:center;gap:13px;flex:0 0 auto;text-decoration:none;margin-right:46px;}
   .bar .logo img{height:37px;width:auto;display:block;}
   .bar .logo .wordmark{font-size:27px;font-weight:700;letter-spacing:-.035em;color:var(--ink);line-height:1.1;white-space:nowrap;}
+  /* 영문 공식 로고 — 마크와 글자가 한 파일입니다. */
+  .bar .logo .enlogo{height:37px;width:auto;display:block;}
+  .fmark .enlogo{height:26px;width:auto;display:block;}
   .bar nav{display:flex;flex-wrap:wrap;align-items:center;gap:46px;flex:1 1 300px;}
   .bar nav a{text-decoration:none;color:var(--ink);font-size:17px;font-weight:500;}
   .bar nav a:hover{color:var(--navy);}
@@ -116,6 +119,7 @@
     .bar{gap:12px 18px;}
     .bar .logo{margin-right:20px;gap:9px;}
     .bar .logo img{height:31px;}
+    .bar .logo .enlogo{height:31px;}
     .bar .logo .wordmark{font-size:22px;}
     .bar nav{gap:22px;}
     .bar nav a,.navBtn{font-size:15.5px;}
@@ -130,6 +134,7 @@
     .bar{flex-wrap:wrap;gap:0;min-height:68px;}
     .bar .logo{flex:1 1 auto;padding-block:11px;gap:9px;margin-right:0;}
     .bar .logo img{height:31px;}
+    .bar .logo .enlogo{height:31px;}
     .bar .logo .wordmark{font-size:22.5px;}
     .burger{
       display:flex;flex-direction:column;justify-content:center;gap:5px;
@@ -605,7 +610,7 @@
 
 <header class="site">
   <div class="wrap bar">
-    <a class="logo" href="#top" aria-label="CHEMIKO CO., LTD. home"><img src="../assets/mark.png" alt=""><span class="wordmark">CHEMIKO</span></a>
+    <a class="logo" href="#top" aria-label="CHEMIKO CO., LTD. home"><img class="enlogo" src="../assets/logo-en.png" alt="CHEMIKO"></a>
     <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="mainnav" aria-label="Open menu"><span></span><span></span><span></span></button>
     <nav id="mainnav" aria-label="Main menu">
       <div class="navItem">
@@ -1025,7 +1030,7 @@
 
 <footer class="site" id="company">
   <div class="wrap inner">
-    <div class="fmark"><img src="../assets/mark.png" alt=""><span>CHEMIKO</span></div>
+    <div class="fmark"><img class="enlogo" src="../assets/logo-en-white.png" alt="CHEMIKO"></div>
     <div class="finfo">
       <p>CHEMIKO CO., LTD. · CEO Soo Jin Ha</p>
       <p>43 Teheran-ro 38-gil, Gangnam-gu, Seoul</p>
