@@ -254,8 +254,8 @@
   /* OUR VALUES */
   .valuesX{position:relative;overflow:hidden;background:#F2F1ED;margin-top:56px;}
   .vx{position:relative;z-index:1;padding:54px 40px 58px;}
-  .vxEyebrow{display:flex;align-items:center;gap:14px;margin:0 0 16px;font-family:var(--label);font-weight:700;font-size:12.5px;letter-spacing:.18em;color:var(--red);}
-  .vxEyebrow i{display:block;width:84px;height:1px;background:var(--red);}
+  .vxEyebrow{display:flex;align-items:center;flex-wrap:wrap;gap:8px 18px;margin:0 0 18px;font-family:var(--label);font-weight:500;font-size:15px;letter-spacing:.22em;color:var(--red);}
+  .vxEyebrow i{display:block;flex:0 0 auto;width:110px;height:1px;background:var(--red);opacity:.4;}
   .valuesX h2{margin:0 0 12px;font-size:clamp(25px,3.7vw,39px);font-weight:700;letter-spacing:-.04em;color:var(--navy-deep);line-height:1.25;}
   .vxLead{margin:0 0 44px;font-size:16px;color:#4A5B6B;}
   .vxGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(224px,1fr));gap:0;}
@@ -458,7 +458,13 @@
   .pgHead p{margin:12px 0 0;font-size:16px;color:#D4E4F3;max-width:56ch;font-weight:300;}
   .pgBody{padding-block:0 84px;}
   .blk{padding-block:56px 0;}
-  .blk .eb{margin:0 0 11px;font-family:var(--label);font-weight:600;font-size:13px;letter-spacing:.09em;color:var(--red);}
+  /* 섹션 라벨 — 글자를 키우고 자간을 넓힌 뒤 가는 선을 덧붙였습니다. */
+  .blk .eb{
+    display:flex;align-items:center;flex-wrap:wrap;gap:8px 18px;
+    margin:0 0 18px;font-family:var(--label);font-weight:500;
+    font-size:15px;letter-spacing:.22em;color:var(--red);text-transform:uppercase;
+  }
+  .blk .eb::after{content:"";flex:1 1 60px;max-width:120px;height:1px;background:currentColor;opacity:.4;}
   .blk h2{margin:0 0 20px;font-size:clamp(21px,3vw,29px);font-weight:500;letter-spacing:-.02em;line-height:1.4;color:var(--navy-deep);}
   .blk p{margin:0 0 15px;font-size:16px;color:var(--body);max-width:68ch;}
   .splitB{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:40px;align-items:center;}
@@ -483,7 +489,12 @@
   .callout p{margin:0;font-size:15px;color:var(--body);}
   /* 오시는 길 */
   .branch{padding-block:54px 0;}
-  .branch .eb{margin:0 0 11px;font-family:var(--label);font-weight:600;font-size:13px;letter-spacing:.09em;color:var(--red);}
+  .branch .eb{
+    display:flex;align-items:center;flex-wrap:wrap;gap:8px 18px;
+    margin:0 0 18px;font-family:var(--label);font-weight:500;
+    font-size:15px;letter-spacing:.22em;color:var(--red);text-transform:uppercase;
+  }
+  .branch .eb::after{content:"";flex:1 1 60px;max-width:120px;height:1px;background:currentColor;opacity:.4;}
   .branch + .branch{border-top:1px solid var(--rule);margin-top:54px;}
   .visitGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;margin-top:22px;}
   .visitGrid img{width:100%;height:100%;min-height:240px;object-fit:cover;display:block;}
@@ -562,6 +573,7 @@
     .tab .l{font-size:14px;}
     .values{padding:30px 20px;}
     .callout{padding:24px 20px;}
+    .blk .eb,.branch .eb,.vxEyebrow{font-size:13px;letter-spacing:.18em;gap:6px 14px;margin-bottom:14px;}
     .pgHead{padding-block:34px 30px;}
     .blk{padding-block:40px 0;}
     .branch{padding-block:38px 0;}
@@ -636,16 +648,6 @@
     </section>
 
     <section class="blk">
-      <p class="eb">OUR BUSINESS</p>
-      <h2>소재부터 장비, 기술 지원까지</h2>
-      <div class="col3">
-        <article><h3>산업용 소재·용접재료</h3><p>특수금속과 비철금속, 용접 및 브레이징 재료를 공정과 사용 조건에 맞춰 제안합니다.</p></article>
-        <article><h3>산업장비·자동화</h3><p>정밀 용접과 튜브·파이프 가공 등 제조 현장에 필요한 장비 및 자동화 솔루션을 공급합니다.</p></article>
-        <article><h3>기술 지원</h3><p>장비 시연과 교육, 유지보수 및 수리 서비스를 통해 고객의 안정적인 설비 활용을 지원합니다.</p></article>
-      </div>
-    </section>
-
-    <section class="blk">
       <p class="eb">PYEONGTAEK R&amp;D CENTER</p>
       <h2>기술을 직접 보고, 경험하는 공간</h2>
       <p>평택지사는 장비 시연과 교육, 유지보수 및 수리를 위한 기술 지원 거점입니다. 다양한 장비를 직접 확인하고 활용 방법을 살펴볼 수 있는 공간을 갖추고 있습니다.</p>
@@ -656,6 +658,16 @@
       <figure class="wideFig">
         <img class="wideImg" src="assets/about/pt-hall.jpg" alt="케미코 평택지사 장비 전시장 전경">
       </figure>
+    </section>
+
+    <section class="blk">
+      <p class="eb">OUR BUSINESS</p>
+      <h2>소재부터 장비, 기술 지원까지</h2>
+      <div class="col3">
+        <article><h3>산업용 소재·용접재료</h3><p>특수금속과 비철금속, 용접 및 브레이징 재료를 공정과 사용 조건에 맞춰 제안합니다.</p></article>
+        <article><h3>산업장비·자동화</h3><p>정밀 용접과 튜브·파이프 가공 등 제조 현장에 필요한 장비 및 자동화 솔루션을 공급합니다.</p></article>
+        <article><h3>기술 지원</h3><p>장비 시연과 교육, 유지보수 및 수리 서비스를 통해 고객의 안정적인 설비 활용을 지원합니다.</p></article>
+      </div>
     </section>
 
 <section class="valuesX">
