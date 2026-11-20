@@ -1539,6 +1539,7 @@ var MAP = (function(){
 
   function draw(box){
     if(box.dataset.done) return;
+    if(!(window.naver && naver.maps && naver.maps.Service)) return;
     var addr = box.getAttribute('data-addr') || '';
     var label = box.getAttribute('data-label') || '';
     naver.maps.Service.geocode({ query: addr }, function(st, res){
@@ -1569,21 +1570,33 @@ var MAP = (function(){
         if(info.getMap()) info.close(); else info.open(map, marker);
       });
       /* 숨겨져 있다가 보이게 된 경우 지도가 찌그러지지 않도록 */
-      setTimeout(function(){ naver.maps.Event.trigger(map, 'resize'); map.setCenter(pos); }, 120);
+      setTimeout(function(){
+        try{ naver.maps.Event.trigger(map, 'resize'); map.setCenter(pos); }catch(e){}
+      }, 120);
     });
   }
 
   function drawAll(){ boxes().forEach(draw); }
 
+  /* 지도 본체가 올라온 뒤 주소 변환 모듈이 따로 붙습니다.
+     준비될 때까지 잠깐 기다렸다가 그립니다. */
+  function whenReady(n){
+    if(window.naver && naver.maps && naver.maps.Service){ drawAll(); return; }
+    if(n > 50){ failed = true; return; }        /* 약 10초 기다린 뒤 포기 */
+    setTimeout(function(){ whenReady(n + 1); }, 200);
+  }
+
   function init(){
     if(failed || !boxes().length) return;
     if(window.naver && window.naver.maps && window.naver.maps.Service){ drawAll(); return; }
-    if(loading) return;
+    if(loading){ whenReady(0); return; }
     loading = true;
+    window.__chemikoMapReady = function(){ whenReady(0); };
     var s = document.createElement('script');
-    s.src = 'https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=' + KEY + '&submodules=geocoder';
+    s.src = 'https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=' + KEY
+          + '&submodules=geocoder&callback=__chemikoMapReady';
     s.async = true;
-    s.onload = function(){ drawAll(); };
+    s.onload = function(){ whenReady(0); };     /* 콜백이 안 와도 대비 */
     s.onerror = function(){ failed = true; };   /* 못 불러오면 안내 문구가 그대로 남습니다 */
     document.head.appendChild(s);
   }
