@@ -497,13 +497,14 @@
   .branch .eb::after{content:"";flex:1 1 60px;max-width:120px;height:1px;background:currentColor;opacity:.4;}
   .branch + .branch{border-top:1px solid var(--rule);margin-top:54px;}
   .visitGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;margin-top:22px;}
-  .visitGrid img{width:100%;height:100%;min-height:240px;object-fit:cover;display:block;}
-  .mapBox{background:var(--fill);border:1px dashed #C2CCD6;min-height:240px;display:flex;align-items:center;justify-content:center;padding:22px;text-align:center;}
+  /* 사진과 지도의 높이를 같은 값으로 고정합니다. */
+  .visitGrid img{width:100%;height:320px;object-fit:cover;display:block;}
+  .mapBox{background:var(--fill);border:1px dashed #C2CCD6;height:320px;display:flex;align-items:center;justify-content:center;padding:22px;text-align:center;}
   .mapBox p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.8;max-width:34ch;}
   /* 지도가 실제로 그려지면 안내 문구 대신 지도가 자리를 채웁니다. */
   .mapBox.live{border:1px solid var(--rule);padding:0;display:block;background:#EEF1F4;}
   .mapBox.live p{display:none;}
-  .mapBox.live > div{width:100%;height:100%;min-height:240px;}
+  .mapBox.live > div{width:100%;height:320px;}
   .addr{margin:22px 0 16px;font-size:18px;font-weight:500;color:var(--ink);}
   .acts{display:flex;flex-wrap:wrap;gap:10px;}
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
@@ -574,6 +575,7 @@
     .values{padding:30px 20px;}
     .callout{padding:24px 20px;}
     .blk .eb,.branch .eb,.vxEyebrow{font-size:13px;letter-spacing:.18em;gap:6px 14px;margin-bottom:14px;}
+    .visitGrid img,.mapBox,.mapBox.live > div{height:240px;}
     .pgHead{padding-block:34px 30px;}
     .blk{padding-block:40px 0;}
     .branch{padding-block:38px 0;}
