@@ -480,6 +480,10 @@
   .visitGrid img{width:100%;height:100%;min-height:240px;object-fit:cover;display:block;}
   .mapBox{background:var(--fill);border:1px dashed #C2CCD6;min-height:240px;display:flex;align-items:center;justify-content:center;padding:22px;text-align:center;}
   .mapBox p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.8;max-width:34ch;}
+  /* 지도가 실제로 그려지면 안내 문구 대신 지도가 자리를 채웁니다. */
+  .mapBox.live{border:1px solid var(--rule);padding:0;display:block;background:#EEF1F4;}
+  .mapBox.live p{display:none;}
+  .mapBox.live > div{width:100%;height:100%;min-height:240px;}
   .addr{margin:22px 0 16px;font-size:18px;font-weight:500;color:var(--ink);}
   .acts{display:flex;flex-wrap:wrap;gap:10px;}
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
@@ -680,7 +684,7 @@
       <h2 class="bh">Seoul head office</h2>
       <div class="visitGrid">
         <img src="../assets/about/seoul.jpg" alt="Exterior of the Cheongnok Building, CHEMIKO’s Seoul head office">
-        <div class="mapBox"><p>[Map goes here]<br>The map is not displayed on this test page.<br>The Naver and Kakao buttons below are working.</p></div>
+        <div class="mapBox" data-map data-addr="서울특별시 강남구 테헤란로38길 43" data-label="CHEMIKO Seoul Head Office"><p>The map could not be loaded.<br>Please use the Naver or Kakao buttons below for directions.</p></div>
       </div>
       <p class="addr">43 Teheran-ro 38-gil, Gangnam-gu, Seoul</p>
       <div class="acts">
@@ -695,7 +699,7 @@
       <h2 class="bh">Pyeongtaek branch</h2>
       <div class="visitGrid">
         <img src="../assets/about/pt-exterior.jpg" alt="Exterior of CHEMIKO’s Pyeongtaek branch">
-        <div class="mapBox"><p>[Map goes here]<br>The map is not displayed on this test page.<br>The Naver and Kakao buttons below are working.</p></div>
+        <div class="mapBox" data-map data-addr="경기도 평택시 칠괴길 87" data-label="CHEMIKO Pyeongtaek R&amp;D Center"><p>The map could not be loaded.<br>Please use the Naver or Kakao buttons below for directions.</p></div>
       </div>
       <p class="addr">87 Chilgoe-gil, Pyeongtaek-si, Gyeonggi-do</p>
       <div class="acts">
@@ -1396,6 +1400,14 @@
       host = el;
       el.innerHTML = head(SUB) + '<div class="wrap pgBody"><p class="stEmpty">Loading.</p></div>';
       load().then(function(){
+        /* Nothing listed yet: show a plain message instead of search and table. */
+        if(!rows.length){
+          el.innerHTML = head('')
+            + '<div class="wrap pgBody"><p class="stEmpty">No stock is listed at the moment. '
+            + 'Tell us what you need and we will confirm availability and delivery.</p>'
+            + '<p style="margin-top:22px"><a class="btn" href="#request">Request documents or quote &rarr;</a></p></div>';
+          return;
+        }
         var ms = makers();
         var h = head(SUB) + '<div class="wrap pgBody">'
           + '<div class="stTools">'
@@ -1512,6 +1524,73 @@
     h+='</div></section>';
     page.innerHTML=h; return true;
   }
+
+/* ── 오시는 길 지도 (네이버 Dynamic Map + Geocoding) ──────────
+   주소만 고치면 핀이 따라갑니다. data-addr 값이 기준입니다.
+   Client ID 는 공개되어도 되는 값이며, 네이버 콘솔에
+   등록된 주소에서만 동작합니다. */
+var MAP = (function(){
+  var KEY = 'ump5lpr6q9';
+  var loading = false, failed = false;
+
+  function boxes(){
+    return Array.prototype.slice.call(document.querySelectorAll('.mapBox[data-map]'));
+  }
+
+  function draw(box){
+    if(box.dataset.done) return;
+    var addr = box.getAttribute('data-addr') || '';
+    var label = box.getAttribute('data-label') || '';
+    naver.maps.Service.geocode({ query: addr }, function(st, res){
+      if(st !== naver.maps.Service.Status.OK) return;
+      var list = res && res.v2 && res.v2.addresses;
+      if(!list || !list.length) return;
+      var pos = new naver.maps.LatLng(parseFloat(list[0].y), parseFloat(list[0].x));
+
+      var holder = document.createElement('div');
+      box.appendChild(holder);
+      box.classList.add('live');
+      box.dataset.done = '1';
+
+      var map = new naver.maps.Map(holder, {
+        center: pos, zoom: 17,
+        scrollWheel: false,            /* 페이지를 넘기다 지도가 확대되지 않도록 */
+        mapDataControl: false,
+        logoControlOptions: { position: naver.maps.Position.BOTTOM_LEFT }
+      });
+      var marker = new naver.maps.Marker({ position: pos, map: map, title: label });
+      var info = new naver.maps.InfoWindow({
+        content: '<div style="padding:9px 13px;font-size:13.5px;font-weight:500;'
+               + 'white-space:nowrap;font-family:inherit;color:#111">' + label + '</div>',
+        borderColor: '#1F4E78', borderWidth: 1, anchorSize: new naver.maps.Size(10, 10)
+      });
+      info.open(map, marker);
+      naver.maps.Event.addListener(marker, 'click', function(){
+        if(info.getMap()) info.close(); else info.open(map, marker);
+      });
+      /* 숨겨져 있다가 보이게 된 경우 지도가 찌그러지지 않도록 */
+      setTimeout(function(){ naver.maps.Event.trigger(map, 'resize'); map.setCenter(pos); }, 120);
+    });
+  }
+
+  function drawAll(){ boxes().forEach(draw); }
+
+  function init(){
+    if(failed || !boxes().length) return;
+    if(window.naver && window.naver.maps && window.naver.maps.Service){ drawAll(); return; }
+    if(loading) return;
+    loading = true;
+    var s = document.createElement('script');
+    s.src = 'https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=' + KEY + '&submodules=geocoder';
+    s.async = true;
+    s.onload = function(){ drawAll(); };
+    s.onerror = function(){ failed = true; };   /* 못 불러오면 안내 문구가 그대로 남습니다 */
+    document.head.appendChild(s);
+  }
+
+  return { init: init };
+})();
+
   function route(){
     var hash = location.hash || '';
     var ms = hash.match(/^#s\/([a-z0-9-]+)$/i);
@@ -1526,6 +1605,7 @@
     }
     if(mp && STATIC[mp[1].toLowerCase()]){
       hideStatic(); STATIC[mp[1].toLowerCase()].hidden=false; page.hidden=true; page.innerHTML=''; showPage();
+      if(mp[1].toLowerCase() === 'directions'){ try{ MAP.init(); }catch(e){} }
     } else if(mp && renderCat(mp[1].toLowerCase())){
       hideStatic(); page.hidden=false; showPage();
     } else if(ms && render(ms[1].toLowerCase())){
