@@ -516,7 +516,7 @@
   .mapBox{background:var(--fill);border:1px dashed #C2CCD6;height:320px;display:flex;align-items:center;justify-content:center;padding:22px;text-align:center;}
   .mapBox p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.8;max-width:34ch;}
   /* 지도가 실제로 그려지면 안내 문구 대신 지도가 자리를 채웁니다. */
-  .mapBox.live{border:1px solid var(--rule);padding:0;display:block;background:#EEF1F4;}
+  .mapBox.live{border:1px solid var(--rule);padding:0;display:block;background:#EEF1F4;overflow:hidden;}
   .mapBox.live p{display:none;}
   .mapBox.live > div{width:100%;height:320px;}
   .addr{margin:22px 0 16px;font-size:18px;font-weight:500;color:var(--ink);}
@@ -1584,20 +1584,24 @@ var MAP = (function(){
   }
 
   function draw(box){
+    /* 아래 표시는 주소 변환을 "요청하기 전에" 찍습니다.
+       응답을 기다리는 사이에 이 함수가 또 불리면 지도가 두 개 겹쳐 붙기 때문입니다. */
     if(box.dataset.done) return;
     if(!(window.naver && naver.maps && naver.maps.Service)) return;
+    box.dataset.done = '1';
     var addr = box.getAttribute('data-addr') || '';
     var label = box.getAttribute('data-label') || '';
     naver.maps.Service.geocode({ query: addr }, function(st, res){
-      if(st !== naver.maps.Service.Status.OK) return;
+      if(st !== naver.maps.Service.Status.OK){ delete box.dataset.done; return; }
       var list = res && res.v2 && res.v2.addresses;
-      if(!list || !list.length) return;
+      if(!list || !list.length){ delete box.dataset.done; return; }
       var pos = new naver.maps.LatLng(parseFloat(list[0].y), parseFloat(list[0].x));
 
-      var holder = document.createElement('div');
-      box.appendChild(holder);
+      /* 이미 들어 있는 칸이 있으면 그것을 쓰고, 없을 때만 새로 만듭니다. */
+      var holder = box.querySelector(':scope > div') || document.createElement('div');
+      if(!holder.parentNode) box.appendChild(holder);
       box.classList.add('live');
-      box.dataset.done = '1';
+      holder.style.height = (box.clientHeight || 320) + 'px';
 
       var map = new naver.maps.Map(holder, {
         center: pos, zoom: 17,
@@ -1615,10 +1619,18 @@ var MAP = (function(){
       naver.maps.Event.addListener(marker, 'click', function(){
         if(info.getMap()) info.close(); else info.open(map, marker);
       });
-      /* 숨겨져 있다가 보이게 된 경우 지도가 찌그러지지 않도록 */
-      setTimeout(function(){
-        try{ naver.maps.Event.trigger(map, 'resize'); map.setCenter(pos); }catch(e){}
-      }, 120);
+      /* 숨겨져 있다가 보이게 된 경우, 또 휴대폰에서 주소창이 접히거나
+         화면을 돌려 높이가 달라진 경우 지도를 다시 맞춥니다. */
+      function refit(){
+        try{
+          holder.style.height = (box.clientHeight || 320) + 'px';
+          naver.maps.Event.trigger(map, 'resize');
+          map.setCenter(pos);
+        }catch(e){}
+      }
+      setTimeout(refit, 120);
+      window.addEventListener('resize', refit);
+      window.addEventListener('orientationchange', function(){ setTimeout(refit, 220); });
     });
   }
 
